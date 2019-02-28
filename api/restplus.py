@@ -8,6 +8,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 log = logging.getLogger(__name__)
 
+
 api = Api(version='1.0', title='TruthTree ML API',
           description='APIs supported by ML')
 

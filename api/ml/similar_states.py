@@ -1,23 +1,20 @@
 from api.ml.common_utils import *
 
-# TODO: Add these to config file and read at the startup
-supported = ['Total_Revenue', 'Total_Taxes', 'Total_Income_Taxes', 'Total_Hospital_Total_Exp', 'Total_Highways_Tot_Exp',
-             'Libraries_Total_Expend', 'Sewerage_Total_Expend', 'Unemp_Comp_Total_Exp,Total_Util_Total_Exp', 'Total_Cash___Securities']
-
 
 def getNearest(table, num):
     nbrs = NearestNeighbors(n_neighbors=num, algorithm='auto').fit(table)
-    distances, indices = nbrs.kneighbors(table)
-
+    _, indices = nbrs.kneighbors(table)
     return indices
 
 
 def get_similar_states(id, attribute, num=2):
     if id not in state_id_name_map.keys():
-        return {"ERROR": "State id unknown"}
+        return {"ERROR": "State id unknown"}, 404
+    if attribute not in supported_attributes:
+        return {"ERROR": "Attribute is not supported"}, 400
     features = ['Year', 'ID']
     features.append(attribute)
-    _df = df[features]
+    _df = state_df[features]
     pivoted = _df.pivot_table(index='ID', columns='Year', values=attribute)
     pivoted = pivoted.sort_index()
     indices = getNearest(pivoted, num+1)
@@ -28,8 +25,7 @@ def get_similar_states(id, attribute, num=2):
     response = []
     for state in similar_states:
         data = {}
-        data["name"] = state_id_name_map[state][0]
-        data["id"] = state
+        data["attribute_name"] = state_id_name_map[state][0]
+        data["state_id"] = state
         response.append(data)
-    # plot_info = plot_similar_states(id, similar_states, attribute)
-    return {"similar_states ": response}
+    return response, 200
