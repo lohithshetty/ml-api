@@ -3,7 +3,7 @@ import logging.config
 import os
 from flask import Flask, Blueprint
 import settings
-from api.ml.endpoints.ep_states import ns as states_ns
+from api.ml.endpoints.ep_states import *
 from api.restplus import api
 from database import db
 from werkzeug.routing import BaseConverter
@@ -13,16 +13,6 @@ app = Flask(__name__)
 logging_conf_path = os.path.normpath(os.path.join(os.path.dirname(__file__), 'logging.conf'))
 logging.config.fileConfig(logging_conf_path)
 log = logging.getLogger(__name__)
-
-
-class ListConverter(BaseConverter):
-
-    def to_python(self, value):
-        return value.split('+')
-
-    def to_url(self, values):
-        return '+'.join(BaseConverter.to_url(value)
-                        for value in values)
 
 
 def configure_app(flask_app):
@@ -40,8 +30,9 @@ def initialize_app(flask_app):
 
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
-    api.add_namespace(states_ns)
-    app.url_map.converters['list'] = ListConverter
+    api.add_namespace(ns_state)
+    # api.add_namespace(ns_supported)
+    # app.url_map.converters['list'] = ListConverter
 
     flask_app.register_blueprint(blueprint)
 
