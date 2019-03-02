@@ -23,21 +23,21 @@ def get_df(payload, multi=False):
 
 def sim_states_multi(payload):
     _df = get_df(payload, multi=True)
-    indices = getNearest(_df, payload['count'])
+    indices = getNearest(_df, payload['count']+1)
     id_ = _df.index.tolist().index(payload['id'])
 
     neighbors = indices[id_]
-    return _df.index[neighbors].tolist()
+    return _df.index[neighbors].tolist()[1:]
 
 
 def sim_states_single(payload):
     _df = get_df(payload)
     pivoted = _df.pivot_table(index='ID', columns='Year', values=payload['attribute'])
     pivoted = pivoted.sort_index()
-    indices = getNearest(pivoted, payload['count'])
+    indices = getNearest(pivoted, payload['count']+1)
     id_ = pivoted.index.tolist().index(payload['id'])
     neighbors = indices[id_]
-    return pivoted.index[neighbors].tolist()[1:]
+    return pivoted.index[neighbors].tolist()[1:]    
 
 
 def get_similar_states(payload, multi=False):
