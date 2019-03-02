@@ -24,11 +24,13 @@ def load_data(table_name, attributes):
 
 
 def get_state_names(state_ids):
-    return [state_id_name_map[i][0] for i in state_ids]
+    return [state_id_to_name[i][0] for i in state_ids]
 
 
 ATTRIBUTES = get_all_attributes('states_data')
 supported_attributes = [i for i in ATTRIBUTES if "total" in i.lower()]
 common_attributes = ['Year', 'ID', 'State']
 state_df = load_data('states_data', supported_attributes + common_attributes)
-state_id_name_map = state_df[['ID', 'State']].groupby('ID')['State'].unique().to_dict()
+state_id_to_name = state_df[['ID', 'State']].groupby('ID')['State'].unique().to_dict()
+# Fix this
+# state_name_to_id = dict(reversed(item) for item in state_id_to_name.items())
