@@ -5,7 +5,7 @@ from flask import Flask, Blueprint
 import settings
 from api.ml.endpoints.ep_states import *
 from api.restplus import api
-from database import db
+# from database import db
 from werkzeug.routing import BaseConverter
 
 app = Flask(__name__)
@@ -36,7 +36,7 @@ def initialize_app(flask_app):
 
     flask_app.register_blueprint(blueprint)
 
-    db.init_app(flask_app)
+    # db.init_app(flask_app)
 
 
 def main():

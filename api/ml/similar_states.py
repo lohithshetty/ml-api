@@ -37,7 +37,7 @@ def sim_states_single(payload):
     indices = getNearest(pivoted, payload['count']+1)
     id_ = pivoted.index.tolist().index(payload['id'])
     neighbors = indices[id_]
-    return pivoted.index[neighbors].tolist()[1:]    
+    return pivoted.index[neighbors].tolist()[1:]
 
 
 def get_similar_states(payload, multi=False):

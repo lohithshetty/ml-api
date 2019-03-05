@@ -1,7 +1,8 @@
+import os
 # Flask settings
 FLASK_SERVER_NAME = 'localhost:5000'
 # TODO: Set it to Fasle in production
-FLASK_DEBUG = True  
+FLASK_DEBUG = True
 
 # Flask-Restplus settings
 RESTPLUS_SWAGGER_UI_DOC_EXPANSION = 'list'
@@ -10,5 +11,13 @@ RESTPLUS_MASK_SWAGGER = False
 RESTPLUS_ERROR_404_HELP = False
 
 # SQLAlchemy settings
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://postgres:123@localhost:5432/data"
+
+POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
+POSTGRES_PORT = os.getenv("POSTGRES_PORT", 5432)
+POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
+POSTGRES_PASS = os.getenv("POSTGRES_PASS", 123)
+POSTGRES_DB = os.getenv("POSTGRES_DB", "data")
+
+
+SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}:{}/{}".format(POSTGRES_USER, POSTGRES_PASS, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB)
 SQLALCHEMY_TRACK_MODIFICATIONS = True

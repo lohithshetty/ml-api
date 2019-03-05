@@ -1,13 +1,10 @@
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
-import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
 import psycopg2
-import io
 import pandas as pd
-import psycopg2
-import config
 import settings
+
 
 # TODO: Read from config file
 engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)

@@ -1,0 +1,17 @@
+version: '2.0'
+services:
+    postgres:
+      image: postgres:latest
+      container_name: postgres
+      ports:
+        - "5431:5432"
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_DB=data_usa
+    app:
+      build: ./app
+      links:
+        - postgres
+      ports:
+        - "5000:5000"
