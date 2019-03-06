@@ -7,7 +7,7 @@ import settings
 # psycopg2
 print("Creating PSQL engine")
 db_engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
-csv = "/Users/lohith/Desktop/NEU_Courses/ThirdSemester/CS6510-ASD/code/ml-api/database/state.csv"
+csv="database/state.csv"
 table_name = "state"
 
 

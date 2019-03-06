@@ -1,6 +1,6 @@
 import os
 # Flask settings
-FLASK_SERVER_NAME = 'localhost:5000'
+FLASK_SERVER_NAME = 'ml.api:8080'
 # TODO: Set it to Fasle in production
 FLASK_DEBUG = True
 
@@ -12,12 +12,11 @@ RESTPLUS_ERROR_404_HELP = False
 
 # SQLAlchemy settings
 
-POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
-POSTGRES_PORT = os.getenv("POSTGRES_PORT", 5432)
-POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
-POSTGRES_PASS = os.getenv("POSTGRES_PASS", "postgres")
-POSTGRES_DB = os.getenv("POSTGRES_DB", "postgres")
+PGHOST = os.getenv("PGHOST", "localhost")
+PGPORT = os.getenv("PGPORT", 5432)
+PGUSER = os.getenv("PGUSER", "postgres")
+PGPASSWORD = os.getenv("PGPASSWORD", 123)
+PGDATABASE = os.getenv("PGDATABASE", "data")
 
-
-SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}:{}/{}".format(POSTGRES_USER, POSTGRES_PASS, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB)
+SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}:{}/{}".format(PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE)
 SQLALCHEMY_TRACK_MODIFICATIONS = True
