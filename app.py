@@ -3,6 +3,7 @@ import logging.config
 import os
 from flask import Flask, Blueprint
 import settings
+import db
 from api.ml.endpoints.ep_states import *
 from api.restplus import api
 # from database import db
@@ -40,6 +41,7 @@ def initialize_app(flask_app):
 
 
 def main():
+    db.init_db()
     initialize_app(app)
     log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
     app.run(debug=settings.FLASK_DEBUG)

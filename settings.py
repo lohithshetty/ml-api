@@ -15,8 +15,8 @@ RESTPLUS_ERROR_404_HELP = False
 POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
 POSTGRES_PORT = os.getenv("POSTGRES_PORT", 5432)
 POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
-POSTGRES_PASS = os.getenv("POSTGRES_PASS", 123)
-POSTGRES_DB = os.getenv("POSTGRES_DB", "data")
+POSTGRES_PASS = os.getenv("POSTGRES_PASS", "postgres")
+POSTGRES_DB = os.getenv("POSTGRES_DB", "postgres")
 
 
 SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}:{}/{}".format(POSTGRES_USER, POSTGRES_PASS, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB)
