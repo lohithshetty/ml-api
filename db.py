@@ -1,12 +1,12 @@
 from sqlalchemy import create_engine
+import os
 import io
 import pandas as pd
-import settings
 
 
 # psycopg2
 print("Creating PSQL engine")
-db_engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
+db_engine = create_engine(os.environ['DATABASE_URL'])
 csv="database/state.csv"
 table_name = "state"
 
@@ -23,3 +23,6 @@ def init_db():
     output.seek(0)
     cur.copy_from(output, table_name, null="")  # null values become ''
     conn.commit()
+
+if __name__ == '__main__':
+    init_db()

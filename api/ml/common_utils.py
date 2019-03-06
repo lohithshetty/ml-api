@@ -2,11 +2,11 @@ import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 from sqlalchemy import create_engine
 import pandas as pd
-import settings
+import os
 
 
 # TODO: Read from config file
-engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
+engine = create_engine(os.environ['DATABASE_URL'])
 
 
 def get_all_attributes(table_name):

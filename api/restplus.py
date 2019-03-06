@@ -2,7 +2,6 @@ import logging
 import traceback
 
 from flask_restplus import Api
-import settings
 from sqlalchemy.orm.exc import NoResultFound
 
 
@@ -18,8 +17,7 @@ def default_error_handler(e):
     message = 'Unhandled exception!!'
     log.exception(message)
 
-    if not settings.FLASK_DEBUG:
-        return {'message': message}, 500
+    return {'message': message}, 500
 
 
 @api.errorhandler(NoResultFound)
