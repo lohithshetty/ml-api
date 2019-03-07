@@ -1,15 +1,18 @@
 from .similar_states import supported_attributes, state_id_to_name, get_similar_states
 from marshmallow import Schema, fields as ma_fields, post_load, validates_schema, ValidationError
 import logging
-from .restful import restful_api as api
-from flask import request
-from flask_restplus import Resource, fields, marshal_with, Namespace
+# from .restful import restful_api as api
+from flask_restplus import Resource, fields, marshal_with, Namespace, Api
 import json
 
 log = logging.getLogger(__name__)
 
 ns_state = Namespace(
     'similarstate/', description='Get states with simlar Revenue,Tax,Expenditures etc.,')
+
+api = Api(version='1.0',
+                  title='TruthTree ML API',
+                  description='APIs supported by ML')
 
 api.add_namespace(ns_state)
 
