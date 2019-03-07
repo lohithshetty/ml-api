@@ -7,7 +7,7 @@ import pandas as pd
 # psycopg2
 print("Creating PSQL engine")
 db_engine = create_engine(os.environ['DATABASE_URL'])
-csv="database/state.csv"
+csv = "data/state.csv"
 table_name = "state"
 
 

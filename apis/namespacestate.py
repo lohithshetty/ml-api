@@ -1,14 +1,33 @@
-import logging
-
-from flask import request
-from flask_restplus import Resource, fields, marshal_with
-from api.restplus import api
-from api.ml.serializers import *
-from api.ml.similar_states import *
-import json
+from .similar_states import supported_attributes, state_id_to_name, get_similar_states
 from marshmallow import Schema, fields as ma_fields, post_load, validates_schema, ValidationError
+import logging
+from .restful import restful_api as api
+from flask import request
+from flask_restplus import Resource, fields, marshal_with, Namespace
+import json
 
 log = logging.getLogger(__name__)
+
+ns_state = Namespace(
+    'similarstate/', description='Get states with simlar Revenue,Tax,Expenditures etc.,')
+
+api.add_namespace(ns_state)
+
+year_range = ns_state.model('Year range',
+                            {'start': fields.Integer(default=1977, description="Starting year"),
+                             'end': fields.Integer(default=2016, description="Ending year")})
+
+StateSingle = ns_state.model('Similar State for single attribute',
+                             {'attribute': fields.String(required=True, description="Attribute Name"),
+                              'id': fields.Integer(required=True, description="State ID"),
+                              'year_range': fields.Nested(year_range, description="Year Range between 1977 and 2016"),
+                              'count': fields.Integer(2, description="Number of similar states in the output")})
+
+StateMulti = ns_state.model('Similar State for multiple attributes',
+                            {'id': fields.Integer(required=True, description="State ID"),
+                             'attribute': fields.List(fields.String, required=True, description="List of attributes"),
+                             'year': fields.Integer(required=True, description="Year"),
+                             'count': fields.Integer(2, description="Number of similar states in the output")})
 
 
 class YearRangeSchema(Schema):
@@ -18,7 +37,8 @@ class YearRangeSchema(Schema):
     @validates_schema
     def validate_input(self, data):
         if data['start'] < 1977 or data['end'] > 2016:
-            raise ValidationError("Only years between 1977 and 2016 are supported(inclusive)")
+            raise ValidationError(
+                "Only years between 1977 and 2016 are supported(inclusive)")
 
 
 class StateSingleSchema(Schema):
@@ -55,13 +75,15 @@ class StateMultiSchema(Schema):
         errors = {}
         for attribute in data['attribute']:
             if attribute not in supported_attributes:
-                errors['attribute'] = ["Unsupported attribute '{}' ".format(attribute)]
+                errors['attribute'] = [
+                    "Unsupported attribute '{}' ".format(attribute)]
                 break
         if data['id'] not in state_id_to_name.keys():
             errors['id'] = ['Invalid State ID']
 
         if data['year'] < 1977 or data['year'] > 2016:
-            errors['year'] = ["Only years between 1977 and 2016 are supported(inclusive)"]
+            errors['year'] = [
+                "Only years between 1977 and 2016 are supported(inclusive)"]
 
         if errors:
             raise ValidationError(errors)
@@ -87,7 +109,7 @@ class SimilarStates(Resource):
     @api.expect(StateSingle)
     def post(self):
         """
-        Returns list of states which are similar in the attribute of interest
+        List of states which are similar in single attribute.
         """
         schema = StateSingleSchema()
         result, errors = schema.load(api.payload)
@@ -102,7 +124,7 @@ class SimilarStatesMulti(Resource):
     @api.expect(StateMulti)
     def post(self):
         """
-        Returns list of states which are similar in the attribute of interest
+        List of states which are similar in multiple attributes(Total_Revenue,Total_Taxes,etc.,)
         """
         schema = StateMultiSchema()
         result, errors = schema.load(api.payload)
