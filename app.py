@@ -16,6 +16,10 @@ log = logging.getLogger(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 manager = Manager(app)
 
+@app.route("/")
+def hello():
+    return "Hello World!"
+
 def initialize_app(flask_app):
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
