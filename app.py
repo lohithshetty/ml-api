@@ -14,6 +14,10 @@ log = logging.getLogger(__name__)
 app = Flask(__name__)
 
 
+@app.route("/")
+def hello():
+    return "Hello!"
+
 def initialize_app():
     app.config.from_object(os.environ['APP_SETTINGS'])
     app.register_blueprint(api, url_prefix='/api')
