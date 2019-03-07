@@ -28,4 +28,4 @@ def initialize_app(flask_app):
 if __name__ == "__main__":
     db.init_db()
     initialize_app(app)
-    manager.run()
+    app.run()
