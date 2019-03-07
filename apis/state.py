@@ -1,21 +1,23 @@
-from .similar_states import supported_attributes, state_id_to_name, get_similar_states
+from .helper_state import supported_attributes, state_id_to_name, get_similar_states
 from marshmallow import Schema, fields as ma_fields, post_load, validates_schema, ValidationError
 import logging
 # from .restful import restful_api as api
 from flask_restplus import Resource, fields, marshal_with, Namespace, Api
 import json
+from flask import Blueprint
 
 log = logging.getLogger(__name__)
 
+statebp = Blueprint('state', __name__)
 ns_state = Namespace(
     'similarstate/', description='Get states with simlar Revenue,Tax,Expenditures etc.,')
 
-api = Api(version='1.0',
-                  title='TruthTree ML API',
-                  description='APIs supported by ML')
+api = Api(statebp, version='1.0',
+          title='TruthTree ML API',
+          description='APIs supported by ML')
 
 api.add_namespace(ns_state)
-    
+
 year_range = ns_state.model('Year range',
                             {'start': fields.Integer(default=1977, description="Starting year"),
                              'end': fields.Integer(default=2016, description="Ending year")})
