@@ -1,7 +1,6 @@
-
 import os
 import logging.config
-from apis.namespacestate import api
+from .apis.namespacestate import api
 from flask import Flask, Blueprint
 
 
