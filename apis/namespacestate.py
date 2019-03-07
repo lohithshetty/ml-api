@@ -15,7 +15,7 @@ api = Api(version='1.0',
                   description='APIs supported by ML')
 
 api.add_namespace(ns_state)
-
+    
 year_range = ns_state.model('Year range',
                             {'start': fields.Integer(default=1977, description="Starting year"),
                              'end': fields.Integer(default=2016, description="Ending year")})
