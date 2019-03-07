@@ -23,6 +23,3 @@ def init_db():
     output.seek(0)
     cur.copy_from(output, table_name, null="")  # null values become ''
     conn.commit()
-
-if __name__ == '__main__':
-    init_db()

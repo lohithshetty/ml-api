@@ -2,7 +2,7 @@ import logging.config
 
 import os
 from flask import Flask, Blueprint
-from api.ml.endpoints.ep_states import ns_state
+from api.ml.serializers import ns_state
 import db
 from api.restplus import api
 from flask_script import Manager
@@ -26,5 +26,6 @@ def initialize_app(flask_app):
     flask_app.register_blueprint(blueprint)
 
 if __name__ == "__main__":
+    db.init_db()
     initialize_app(app)
     manager.run()
