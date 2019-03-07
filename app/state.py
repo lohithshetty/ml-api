@@ -1,7 +1,6 @@
 from .helper_state import supported_attributes, state_id_to_name, get_similar_states
 from marshmallow import Schema, fields as ma_fields, post_load, validates_schema, ValidationError
 import logging
-# from .restful import restful_api as api
 from flask_restplus import Resource, fields, marshal_with, Namespace, Api
 import json
 from flask import Blueprint
