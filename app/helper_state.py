@@ -75,7 +75,8 @@ def get_similar_states(payload, multi=False):
     return response
 
 
-supported_attributes = get_all_attributes('state')
+features = get_all_attributes('state')
+supported_attributes = [x for x in features if "total" in x.lower()]
 state_df = read_table('state', supported_attributes)
 state_id_to_name = state_df[['ID', 'State']].groupby(
     'ID')['State'].unique().to_dict()
