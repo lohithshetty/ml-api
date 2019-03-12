@@ -1,18 +1,19 @@
 from sqlalchemy import create_engine
 import os
 import io
+from pathlib import Path
 import sys
 import pandas as pd
 
 print("Creating PSQL engine")
 db_engine = create_engine(os.environ['DATABASE_URL'])
-data_dir = os.path.join(sys.path[0], "app/data/")
+data_dir = Path("app/data/")
 data_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
 
 
 def init_db():
     for csv in data_files:
-        create_table(data_dir+csv, csv.split('.')[0])
+        create_table(data_dir / csv, csv.split('.')[0])
 
 
 def create_table(csv, table_name):

@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 statebp = Blueprint('state', __name__)
 ns_state = Namespace(
-    'api/similarstate/', description='Get states with simlar Revenue,Tax,Expenditures etc.,')
+    'similarstate', description='Get states with simlar Revenue,Tax,Expenditures etc.,')
 
 api = Api(statebp, version='1.0',
           title='TruthTree ML API',

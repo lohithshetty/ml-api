@@ -70,9 +70,9 @@ def get_similar_states(payload, multi=False):
     else:
         similar_states = sim_states_single(payload)
     response = []
-    for state in similar_states:
+    for s in similar_states:
         data = {}
-        data["state_name"] = state.state_id_to_name[state][0]
-        data["state_id"] = state
+        data["state_name"] = state.state_id_to_name[s][0]
+        data["state_id"] = s
         response.append(data)
     return response

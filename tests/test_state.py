@@ -1,33 +1,56 @@
-import os
-import tempfile
-
 import pytest
-from app import create_app
-
-# read in SQL for populating test data
-with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
-    _data_sql = f.read().decode('utf8')
+import json
 
 
-@pytest.fixture
-def app():
-    """Create and configure a new app instance for each test."""
-    # create a temporary file to isolate the database for each test
-    db_fd, db_path = tempfile.mkstemp()
-    # create the app with common test config
-    app = create_app({
-        'TESTING': True,
-        'DATABASE': db_path,
-    })
-
-    yield app
-
-    # close and remove the temporary database
-    os.close(db_fd)
-    os.unlink(db_path)
+@pytest.mark.parametrize('path', (
+    '/api',
+))
+def test_api_path(client, path):
+    response = client.get(path)
+    assert response.headers['Location'] == 'http://localhost/api/'
 
 
-@pytest.fixture
-def client(app):
-    """A test client for the app."""
-    return app.test_client()
+valid_request_data_single = {
+    "attribute": "Total_Revenue",
+    "count": 2,
+    "id": 10000000,
+    "year_range": {
+        "end": 2016,
+        "start": 1977
+    }
+}
+
+
+@pytest.mark.parametrize('path', (
+    '/api/similarstate/single',
+))
+def test_api_path(client, path):
+    response = client.post(path, json=valid_request_data_single)
+    assert response.data == b'[{"state_name": "KENTUCKY", "state_id": 180000000}, {"state_name": "CONNECTICUT", "state_id": 70000000}]\n'
+
+
+valid_request_data_multi = {
+    "attribute": [
+        "Total_Revenue",
+        "Total_Taxes"
+    ],
+    "count": 2,
+    "id": 10000000,
+    "year": 1997
+}
+
+
+@pytest.mark.parametrize('path', (
+    '/api/similarstate/multi',
+))
+def test_api_path(client, path):
+    response = client.post(path, json=valid_request_data_multi)
+    assert response.data == b'[{"state_name": "SOUTH CAROLINA", "state_id": 410000000}, {"state_name": "OREGON", "state_id": 380000000}]\n'
+
+
+@pytest.mark.parametrize('path', (
+    '/api/similarstate/supported',
+))
+def test_api_path(client, path):
+    response = json.loads(client.get(path).get_data(as_text=True))
+    assert len(response['supported_attributes']) == 107
