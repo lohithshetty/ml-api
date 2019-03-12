@@ -1,11 +1,12 @@
 from sqlalchemy import create_engine
 import os
 import io
+import sys
 import pandas as pd
 
 print("Creating PSQL engine")
 db_engine = create_engine(os.environ['DATABASE_URL'])
-data_dir = "data/"
+data_dir = os.path.join(sys.path[0], "app/data/")
 data_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
 
 

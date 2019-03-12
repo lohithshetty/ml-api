@@ -3,7 +3,6 @@ import tempfile
 
 import pytest
 from app import create_app
-from tests import mock_db as db
 
 # read in SQL for populating test data
 with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
