@@ -20,9 +20,11 @@ def create_app(test_config=None):
         pass
 
     from app import db
-    db.init_db()
+    # db.init_db()
     # apply the blueprints to the app
     from app import state
-    app.register_blueprint(state.statebp, url_prefix='/api')
+    from app import city
+    app.register_blueprint(state.placebp, url_prefix='/api')
+    # app.register_blueprint(city.citybp, url_prefix='/api')
 
     return app

@@ -17,6 +17,7 @@ def init_db():
 
 
 def create_table(csv, table_name):
+    print("Creating table {} from file {}".format(table_name, csv))
     df = pd.read_csv(csv)
     df = df.dropna(axis=1)
     df.head(0).to_sql(table_name, db_engine, if_exists='replace',

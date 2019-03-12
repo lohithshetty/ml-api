@@ -1,26 +1,8 @@
 import os
-from sqlalchemy import create_engine
-import pandas as pd
 from sklearn.neighbors import NearestNeighbors
-from app import db
+from app import util
 
-
-class State(object):
-    def __init__(self, table_name):
-        self.engine = db.db_engine
-        self.table_name = table_name
-        self.df = pd.read_sql(self.table_name, self.engine)
-        self.features = self.df.keys().tolist()
-        self.supported_attributes = [
-            x for x in self.features if "total" in x.lower()]
-        self.state_id_to_name = self.df[['ID', 'State']].groupby(
-            'ID')['State'].unique().to_dict()
-
-    def get_state_names(self, state_ids):
-        return [self.state_id_to_name[i][0] for i in state_ids]
-
-
-state = State('state')
+place = util.Data('state')
 
 
 def getNearest(table, num):
@@ -33,18 +15,18 @@ def get_df(payload, multi=False):
     features = ['Year', 'ID']
     if multi:
         features = features + payload['attribute']
-        _df = state.df[state.df['Year'] == payload['year']][features]
+        _df = place.df[place.df['Year'] == payload['year']][features]
         _df = _df.dropna()
         _df = _df.set_index('ID')
     else:
         features.append(payload['attribute'])
-        _df = state.df[features]
+        _df = place.df[features]
         _df = _df[(_df['Year'] >= payload['year_range']['start'])
                   & (_df['Year'] <= payload['year_range']['end'])]
     return _df
 
 
-def sim_states_multi(payload):
+def sim_places_multi(payload):
     _df = get_df(payload, multi=True)
     indices = getNearest(_df, payload['count']+1)
     id_ = _df.index.tolist().index(payload['id'])
@@ -53,7 +35,7 @@ def sim_states_multi(payload):
     return _df.index[neighbors].tolist()[1:]
 
 
-def sim_states_single(payload):
+def sim_places_single(payload):
     _df = get_df(payload)
     pivoted = _df.pivot_table(
         index='ID', columns='Year', values=payload['attribute'])
@@ -64,15 +46,15 @@ def sim_states_single(payload):
     return pivoted.index[neighbors].tolist()[1:]
 
 
-def get_similar_states(payload, multi=False):
+def get_similar_places(payload, multi=False):
     if multi:
-        similar_states = sim_states_multi(payload)
+        similar_places = sim_places_multi(payload)
     else:
-        similar_states = sim_states_single(payload)
+        similar_places = sim_places_single(payload)
     response = []
-    for s in similar_states:
+    for s in similar_places:
         data = {}
-        data["state_name"] = state.state_id_to_name[s][0]
-        data["state_id"] = s
+        data["place_name"] = place.id_to_name[s][0]
+        data["place_id"] = s
         response.append(data)
     return response
