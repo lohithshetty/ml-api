@@ -1,4 +1,4 @@
-from .helper_state import supported_attributes, state_id_to_name, get_similar_states
+from app.helper_state import state, get_similar_states
 from marshmallow import Schema, fields as ma_fields, post_load, validates_schema, ValidationError
 import logging
 from flask_restplus import Resource, fields, marshal_with, Namespace, Api
@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 statebp = Blueprint('state', __name__)
 ns_state = Namespace(
-    'similarstate/', description='Get states with simlar Revenue,Tax,Expenditures etc.,')
+    'api/similarstate/', description='Get states with simlar Revenue,Tax,Expenditures etc.,')
 
 api = Api(statebp, version='1.0',
           title='TruthTree ML API',
@@ -54,9 +54,9 @@ class StateSingleSchema(Schema):
     @validates_schema
     def validate_input(self, data):
         errors = {}
-        if data['attribute'] not in supported_attributes:
+        if data['attribute'] not in state.supported_attributes:
             errors['attribute'] = ['Unsupported attribute']
-        if data['id'] not in state_id_to_name.keys():
+        if data['id'] not in state.state_id_to_name.keys():
             errors['id'] = ['Invalid State ID']
 
         if errors:
@@ -78,11 +78,11 @@ class StateMultiSchema(Schema):
         pass
         errors = {}
         for attribute in data['attribute']:
-            if attribute not in supported_attributes:
+            if attribute not in state.supported_attributes:
                 errors['attribute'] = [
                     "Unsupported attribute '{}' ".format(attribute)]
                 break
-        if data['id'] not in state_id_to_name.keys():
+        if data['id'] not in state.state_id_to_name.keys():
             errors['id'] = ['Invalid State ID']
 
         if data['year'] < 1977 or data['year'] > 2016:
@@ -104,7 +104,7 @@ class Supported(Resource):
         """
         Returns list of attributes supported to compare states
         """
-        return {'supported_attributes': supported_attributes}
+        return {'supported_attributes': state.supported_attributes}
 
 
 @ns_state.route('/single')
