@@ -1,4 +1,4 @@
-from app.helper_state import place, get_similar_places
+from app.helper import get_similar_places, get_place
 from marshmallow import Schema, fields as ma_fields, post_load, validates_schema, ValidationError
 import logging
 from flask_restplus import Resource, fields, marshal_with, Namespace, Api
@@ -22,19 +22,20 @@ year_range = ns_place.model('Year range',
                              'end': fields.Integer(default=2016, description="Ending year")})
 
 PlaceSingle = ns_place.model('Similar places for single attribute',
-                             {'attribute': fields.String(required=True, description="Attribute Name"),
-                              'normalize_by': fields.String(description="Attribute to normalize the data. Ex. Population, Total_Revenue", default="Population"),
-                              'id': fields.Integer(required=True, description="Place ID"),
-                              'year_range': fields.Nested(year_range, description="Year Range between 1977 and 2016"),
-                              'count': fields.Integer(2, description="Number of similar places in the output")})
+                             { 'id': fields.Integer(required=True, description="Place ID"),
+                               'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)")
+                               'attribute': fields.String(required=True, description="Attribute Name"),
+                               'normalize_by': fields.String(description="Attribute to normalize the data. Ex. Population, Total_Revenue", default="Population"),
+                               'year_range': fields.Nested(year_range, description="Year Range between 1977 and 2016"),
+                               'count': fields.Integer(2, description="Number of similar places in the output")})
 
 PlaceMulti = ns_place.model('Similar places for multiple attributes',
-                            {'id': fields.Integer(required=True, description="Place ID"),
+                           { 'id': fields.Integer(required=True, description="Place ID"),
+                             'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)")
+                             'year': fields.Integer(required=True, description="Year"),
                              'attribute': fields.List(fields.String, required=True, description="List of attributes"),
                              'normalize_by': fields.String(description="Attribute to normalize the data. Ex. Population, Total_Revenue", default="Population"),
-                             'year': fields.Integer(required=True, description="Year"),
                              'count': fields.Integer(2, description="Number of similar places in the output")})
-
 
 class YearRangeSchema(Schema):
     start = ma_fields.Integer()
@@ -46,6 +47,13 @@ class YearRangeSchema(Schema):
             raise ValidationError(
                 "Only years between 1977 and 2016 are supported(inclusive)")
 
+def validate_id(type,id):
+    place = get_place(type)
+    if not place:
+        return False, "Invalid place type "
+    if id not in place.id_to_name.keys():
+        return False, "Invalid place id {}".format(id)
+    return True, "Success"
 
 class PlaceSingleSchema(Schema):
     id = ma_fields.Integer()
@@ -56,16 +64,22 @@ class PlaceSingleSchema(Schema):
     @validates_schema
     def validate_input(self, data):
         errors = {}
+        if data['place_type'] not in [0,1,2]:
+            errors['place_type'] = ['Unsupported place type, use 0 (for state), 1 (for county) and 2 (for cities)']
+            raise ValidationError(errors)
+
+        place = get_place(data['place_type'])   
         if data['attribute'] not in place.supported_attributes:
             errors['attribute'] = ['Unsupported attribute']
+
         if data['id'] not in place.id_to_name.keys():
-            errors['id'] = ['Invalid Place ID']
+            errors['id'] = "Invalid place id"
 
         if errors:
             raise ValidationError(errors)
 
     class Meta:
-        fields = ('id', 'attribute', 'count', 'year_range')
+        fields = ('id', 'attribute', 'count','place_type', 'year_range')
         ordered = True
 
 
@@ -77,15 +91,20 @@ class PlaceMultiSchema(Schema):
 
     @validates_schema
     def validate_input(self, data):
-        pass
         errors = {}
+        if data['place_type'] not in [0,1,2]:
+            errors['place_type'] = ['Unsupported place type, use 0 (for state), 1 (for county) and 2 (for cities)']
+            raise ValidationError(errors)
+
+        place = get_place(data['place_type'])   
         for attribute in data['attribute']:
             if attribute not in place.supported_attributes:
                 errors['attribute'] = [
                     "Unsupported attribute '{}' ".format(attribute)]
                 break
+
         if data['id'] not in place.id_to_name.keys():
-            errors['id'] = ['Invalid Place ID']
+            errors['id'] = "Invalid place id"
 
         if data['year'] < 1977 or data['year'] > 2016:
             errors['year'] = [
@@ -95,7 +114,7 @@ class PlaceMultiSchema(Schema):
             raise ValidationError(errors)
 
         class Meta:
-            fields = ('id', 'attribute', 'count', 'year')
+            fields = ('id', 'attribute', 'count','place_type', 'year')
             ordered = True
 
 
@@ -125,7 +144,7 @@ class SimilarPlaces(Resource):
         result, errors = schema.load(api.payload)
         if errors:
             return errors, 400
-        return get_similar_places(result)
+        return similar_single_attr_multi_year(result)
 
 
 @ns_place.route('/multi')
@@ -133,7 +152,7 @@ class SimilarPlaces(Resource):
 @ns_place.response(500, 'Internal Server Error')
 @ns_place.response(200, 'OK')
 @ns_place.response(400, 'Bad Request')
-class SimilarPlacesMulti(Resource):
+class SimilarPlacesMultiAttr(Resource):
     @api.expect(PlaceMulti)
     def post(self):
         """
@@ -144,4 +163,4 @@ class SimilarPlacesMulti(Resource):
         if errors:
             return errors, 400
         print(json.dumps(result))
-        return get_similar_places(result, multi=True)
+        return similar_multi_attr_single_year(result, multiattr=True)
