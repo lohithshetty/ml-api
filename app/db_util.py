@@ -12,6 +12,7 @@ class Data(object):
         self.id_to_name = None
         
     def create_pivoted_table(self):
+        print("Creating pivot table for {}".format(self.table_name))
         self.df = pd.pivot_table(self.df, index='id',columns='year', values=list(set(self.df.keys())-set(['year', 'id'])))
         keys = list(set([key[0] for key in self.df.keys()]))
         for i, key in enumerate(keys, 1):

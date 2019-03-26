@@ -6,11 +6,14 @@ import app.db_util as db_util
 state = db_util.Data('state')
 state.create_pivoted_table()
 
-county = db_util.Data('county')
-county.create_pivoted_table()
+# county = db_util.Data('state')
+# county.create_pivoted_table()
 
-city = db_util.Data('city')
-city.create_pivoted_table()
+# city = db_util.Data('state')
+# city.create_pivoted_table()
+
+county=state
+city=state
 
 def get_place(place_type):
     place = None
