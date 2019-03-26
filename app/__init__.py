@@ -22,9 +22,9 @@ def create_app(test_config=None):
     from app import db
     # db.init_db()
     # apply the blueprints to the app
-    from app import state
+    from app import endpoints
    # from app import city
-    app.register_blueprint(state.placebp, url_prefix='/api')
+    app.register_blueprint(endpoints.placebp, url_prefix='/api')
     # app.register_blueprint(city.citybp, url_prefix='/api')
 
     return app
