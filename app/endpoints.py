@@ -23,7 +23,7 @@ year_range = ns_place.model('Year range',
 
 PlaceSingle = ns_place.model('Similar places for single attribute',
                              { 'id': fields.Integer(required=True, description="Place ID"),
-                               'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)")
+                               'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)"),
                                'attribute': fields.String(required=True, description="Attribute Name"),
                                'normalize_by': fields.String(description="Attribute to normalize the data. Ex. Population, Total_Revenue", default="Population"),
                                'year_range': fields.Nested(year_range, description="Year Range between 1977 and 2016"),
@@ -31,7 +31,7 @@ PlaceSingle = ns_place.model('Similar places for single attribute',
 
 PlaceMulti = ns_place.model('Similar places for multiple attributes',
                            { 'id': fields.Integer(required=True, description="Place ID"),
-                             'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)")
+                             'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)"),
                              'year': fields.Integer(required=True, description="Year"),
                              'attribute': fields.List(fields.String, required=True, description="List of attributes"),
                              'normalize_by': fields.String(description="Attribute to normalize the data. Ex. Population, Total_Revenue", default="Population"),
