@@ -13,7 +13,7 @@ class Data(object):
         self.id_to_name = None
         
         def create_pivoted_table(self):
-            self.df = pd.pivot_table(self.df, index='id',columns='year', values=list(set(self.df.keys()-set(['year', 'id'])))
+            self.df = pd.pivot_table(self.df, index='id',columns='year', values=list(set(self.df.keys()-set(['year', 'id']))))
             for i, key in enumerate(self.keys, 1):
                 self.df[key].iloc[:, 0] = self.df[key].iloc[:, 0].fillna(0)
                 self.df[key].iloc[:, -1] = self.df[key].iloc[:, -1].fillna(0)
