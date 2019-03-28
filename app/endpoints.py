@@ -47,18 +47,12 @@ class YearRangeSchema(Schema):
             raise ValidationError(
                 "Only years between 1977 and 2016 are supported(inclusive)")
 
-def validate_id(type,id):
-    place = get_place(type)
-    if not place:
-        return False, "Invalid place type "
-    if id not in place.id_to_name.keys():
-        return False, "Invalid place id {}".format(id)
-    return True, "Success"
-
 class PlaceSingleSchema(Schema):
     id = ma_fields.Integer()
-    attribute = ma_fields.String()
+    attribute = ma_fields.Integer()
+    place_type = ma_fields.Integer()
     count = ma_fields.Integer()
+    normalize_by = ma_fields.Integer()
     year_range = ma_fields.Nested(YearRangeSchema)
 
     @validates_schema
@@ -72,7 +66,7 @@ class PlaceSingleSchema(Schema):
         if data['attribute'] not in place.supported_attributes:
             errors['attribute'] = ['Unsupported attribute']
 
-        if data['id'] not in place.id_to_name.keys():
+        if data['id'] not in place.index:
             errors['id'] = "Invalid place id"
 
         if errors:
@@ -85,7 +79,9 @@ class PlaceSingleSchema(Schema):
 
 class PlaceMultiSchema(Schema):
     id = ma_fields.Integer()
-    attribute = ma_fields.List(ma_fields.String)
+    place_type = ma_fields.Integer()
+    normalize_by = ma_fields.Integer()
+    attribute = ma_fields.List(ma_fields.Integer)
     count = ma_fields.Integer()
     year = ma_fields.Integer()
 
@@ -103,7 +99,7 @@ class PlaceMultiSchema(Schema):
                     "Unsupported attribute '{}' ".format(attribute)]
                 break
 
-        if data['id'] not in place.id_to_name.keys():
+        if data['id'] not in place.index:
             errors['id'] = "Invalid place id"
 
         if data['year'] < 1977 or data['year'] > 2016:
@@ -140,6 +136,7 @@ class Supported(Resource):
         Returns list of common attributes supported to compare places
         """
         return get_common_attributes()
+
 
 @ns_place.route('/single')  
 @ns_place.response(501, 'Place ID not supported')
