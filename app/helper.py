@@ -59,7 +59,11 @@ def similar_multi_attr_single_year(pivoted, name_id, attributes, year, norm_by=N
     
     return df.iloc[indices].index.tolist(), distances
 
- 
+def get_supported_attributes(type):
+    place = get_place(type)
+    response = { "state": place.supported_attributes}
+    return response
+
 def get_similar_places(payload, multiattr=False):
     place = get_place(payload['place_type'])
     pivoted = place.df

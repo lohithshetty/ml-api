@@ -1,4 +1,4 @@
-from app.helper import get_similar_places, get_place
+from app.helper import get_similar_places, get_place,get_supported_attributes
 from marshmallow import Schema, fields as ma_fields, post_load, validates_schema, ValidationError
 import logging
 from flask_restplus import Resource, fields, marshal_with, Namespace, Api
@@ -118,7 +118,7 @@ class PlaceMultiSchema(Schema):
             ordered = True
 
 
-@ns_place.route('/supported')
+@ns_place.route('/supported/<int:place_type>')
 @ns_place.response(200, 'OK')
 @ns_place.response(500, 'Internal Server Error')
 class Supported(Resource):
@@ -126,10 +126,11 @@ class Supported(Resource):
         """
         Returns list of attributes supported to compare places
         """
-        return {'attributes_supported': place.supported_attributes}
+        return get_supported_attributes(place_type)
+        
 
 
-@ns_place.route('/single')
+@ns_place.route('/single')  
 @ns_place.response(501, 'Place ID not supported')
 @ns_place.response(500, 'Internal Server Error')
 @ns_place.response(200, 'OK')
@@ -144,7 +145,7 @@ class SimilarPlaces(Resource):
         result, errors = schema.load(api.payload)
         if errors:
             return errors, 400
-        return similar_single_attr_multi_year(result)
+        return get_similar_places(result)
 
 
 @ns_place.route('/multi')
@@ -163,4 +164,4 @@ class SimilarPlacesMultiAttr(Resource):
         if errors:
             return errors, 400
         print(json.dumps(result))
-        return similar_multi_attr_single_year(result, multiattr=True)
+        return get_similar_places(result, multiattr=True)

@@ -8,8 +8,8 @@ class Data(object):
         self.engine = db.db_engine
         self.table_name = table_name
         self.df = pd.read_sql(self.table_name, self.engine)
-        self.supported_attributes = None
-        self.id_to_name = None
+        self.supported_attributes = ["Total_Revenue","Total_Taxes"]
+        self.id_to_name = {'10':'temp'}
         
     def create_pivoted_table(self):
         print("Creating pivot table for {}".format(self.table_name))
