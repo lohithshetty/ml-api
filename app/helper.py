@@ -64,7 +64,8 @@ def get_supported_attributes(place_type):
     place = get_place(place_type)
     response = []
     for _id in place.supported_attributes:
-        attribute = dict({'id' : _id} + util.attr_id_map[_id])
+        attribute = {'id' : _id} 
+        attribute.update(util.attr_id_map[_id])
         response.append(attribute)
 
     return response
