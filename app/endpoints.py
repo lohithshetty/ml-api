@@ -122,7 +122,7 @@ class PlaceMultiSchema(Schema):
 @ns_place.response(200, 'OK')
 @ns_place.response(500, 'Internal Server Error')
 class Supported(Resource):
-    def get(self):
+    def get(self,place_type):
         """
         Returns list of attributes supported to compare places
         """
