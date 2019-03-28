@@ -86,19 +86,19 @@ def get_similar_places(payload, multiattr=False):
                                                         payload['id'],
                                                         payload['attribute'],
                                                         payload['year'],
-                                                        payload['normalize_by'],
-                                                        payload['count'])
+                                                        norm_by=str(payload['normalize_by']),
+                                                        num=payload['count'])
     else:
         similar_places = similar_single_attr_multi_year(pivoted, 
                                                         payload['id'],
-                                                        payload['attribute'],
-                                                        payload['year_range'],
-                                                        payload['normalize_by'],
-                                                        payload['count'])
+                                                        str(payload['attribute']),
+                                                        year_range=payload['year_range'],
+                                                        norm_by=str(payload['normalize_by']),
+                                                        num=payload['count'])
     response = []
     for s in similar_places:
         data = {}
-        data["place_name"] = place.id_to_name[s][0]
+        # data["place_name"] = place.id_to_name[s][0]
         data["place_id"] = s
         response.append(data)
     return response
