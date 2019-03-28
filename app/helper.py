@@ -2,7 +2,6 @@ import os
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 import app.db_util as util
-COMMON_ATTRIBUTES = []
 
 state = util.Data('state',0)
 state.create_pivoted_table()
@@ -82,14 +81,15 @@ def get_similar_places(payload, multiattr=False):
     place = get_place(payload['place_type'])
     pivoted = place.df
     if multiattr:
-        similar_places = similar_multi_attr_single_year(pivoted, 
+        attributes = [str(a) for a in payload['attribute']]
+        similar_places, _ = similar_multi_attr_single_year(pivoted, 
                                                         payload['id'],
-                                                        payload['attribute'],
+                                                        attributes,
                                                         payload['year'],
                                                         norm_by=str(payload['normalize_by']),
                                                         num=payload['count'])
     else:
-        similar_places = similar_single_attr_multi_year(pivoted, 
+        similar_places, _ = similar_single_attr_multi_year(pivoted, 
                                                         payload['id'],
                                                         str(payload['attribute']),
                                                         year_range=payload['year_range'],
