@@ -99,7 +99,7 @@ def get_similar_places(payload, multiattr=False):
                                                            _id,
                                                            attributes,
                                                            payload['year'],
-                                                           norm_by=norm_by
+                                                           norm_by=norm_by,
                                                            num=count)
     else:
         attribute = str(payload['attribute'])
