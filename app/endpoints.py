@@ -1,4 +1,4 @@
-from app.helper import get_similar_places, get_place,get_supported_attributes
+from app.helper import *
 from marshmallow import Schema, fields as ma_fields, post_load, validates_schema, ValidationError
 import logging
 from flask_restplus import Resource, fields, marshal_with, Namespace, Api
@@ -128,7 +128,16 @@ class Supported(Resource):
         """
         return get_supported_attributes(place_type)
         
-
+@ns_place.route('/supported/common')
+@ns_place.response(200, 'OK')
+@ns_place.response(500, 'Internal Server Error')
+class Supported(Resource):
+    def get(self):
+        """
+        Returns list of attributes supported to compare places
+        """
+        return get_common_attributes()
+        
 
 @ns_place.route('/single')  
 @ns_place.response(501, 'Place ID not supported')
