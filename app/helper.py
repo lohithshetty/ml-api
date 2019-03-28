@@ -96,7 +96,7 @@ def get_similar_places(payload, multiattr=False):
                                                         norm_by=str(payload['normalize_by']),
                                                         num=payload['count'])
     response = []
-    for s in similar_places:
+    for s in similar_places[1:]:
         data = {}
         # data["place_name"] = place.id_to_name[s][0]
         data["place_id"] = s
