@@ -66,12 +66,17 @@ def get_supported_attributes(place_type):
     for _id in place.supported_attributes:
         attribute = {'id' : _id} 
         attribute.update(util.attr_id_map[_id])
-        response.append(attribute)
+        response.append(attribute)  
 
     return response
 
 def get_common_attributes():
-    return  {"common": COMMON_ATTRIBUTES}
+    response = []
+    for _id in util.supported['common']:
+        attribute = {'id' : _id} 
+        attribute.update(util.attr_id_map[_id])
+        response.append(attribute)  
+    return response
 
 def get_similar_places(payload, multiattr=False):
     place = get_place(payload['place_type'])
