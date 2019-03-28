@@ -4,7 +4,7 @@ from sklearn.neighbors import NearestNeighbors
 import app.db_util as db_util
 COMMON_ATTRIBUTES = []
 
-state = db_util.Data('state')
+state = db_util.Data('state',0)
 state.create_pivoted_table()
 
 # county = db_util.Data('state')
@@ -67,7 +67,7 @@ def get_supported_attributes(place_type):
 
 def get_common_attributes():
     return  {"common": COMMON_ATTRIBUTES}
-    
+
 def get_similar_places(payload, multiattr=False):
     place = get_place(payload['place_type'])
     pivoted = place.df

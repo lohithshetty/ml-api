@@ -1,15 +1,20 @@
 import pandas as pd
 import numpy as np
 from app import db
+import json
 
+
+with open(db.data_dir / 'supported.json', 'r') as fp:
+    supported = json.load(fp)
 
 class Data(object):
-    def __init__(self, table_name):
+    def __init__(self, table_name, place_type):
         self.engine = db.db_engine
         self.table_name = table_name
+        self.place_type = place_type
         self.df = pd.read_sql(self.table_name, self.engine)
-        self.supported_attributes = ["Total_Revenue","Total_Taxes"]
-        self.id_to_name = {'10':'temp'}
+        self.supported_attributes = supported[table_name]
+        # self.id_to_name = {'10':'temp'}
         
     def create_pivoted_table(self):
         print("Creating pivot table for {}".format(self.table_name))
