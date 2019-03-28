@@ -66,7 +66,7 @@ class PlaceSingleSchema(Schema):
         if data['attribute'] not in place.supported_attributes:
             errors['attribute'] = ['Unsupported attribute']
 
-        if data['id'] not in place.index:
+        if data['id'] not in place.df.index:
             errors['id'] = "Invalid place id"
 
         if errors:
@@ -99,7 +99,7 @@ class PlaceMultiSchema(Schema):
                     "Unsupported attribute '{}' ".format(attribute)]
                 break
 
-        if data['id'] not in place.index:
+        if data['id'] not in place.df.index:
             errors['id'] = "Invalid place id"
 
         if data['year'] < 1977 or data['year'] > 2016:
