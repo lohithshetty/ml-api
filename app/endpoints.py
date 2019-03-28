@@ -24,8 +24,8 @@ year_range = ns_place.model('Year range',
 PlaceSingle = ns_place.model('Similar places for single attribute',
                              { 'id': fields.Integer(required=True, description="Place ID"),
                                'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)"),
-                               'attribute': fields.String(required=True, description="Attribute Name"),
-                               'normalize_by': fields.String(description="Attribute to normalize the data. Ex. Population, Total_Revenue", default="Population"),
+                               'attribute': fields.Integer(required=True, description="Attribute ID"),
+                               'normalize_by': fields.Integer(description="Attribute to normalize the data, default = 1 (Population)", default=1),
                                'year_range': fields.Nested(year_range, description="Year Range between 1977 and 2016"),
                                'count': fields.Integer(2, description="Number of similar places in the output")})
 
@@ -33,8 +33,8 @@ PlaceMulti = ns_place.model('Similar places for multiple attributes',
                            { 'id': fields.Integer(required=True, description="Place ID"),
                              'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)"),
                              'year': fields.Integer(required=True, description="Year"),
-                             'attribute': fields.List(fields.String, required=True, description="List of attributes"),
-                             'normalize_by': fields.String(description="Attribute to normalize the data. Ex. Population, Total_Revenue", default="Population"),
+                             'attribute': fields.List(fields.Integer, required=True, description="List of attribute IDs"),
+                             'normalize_by': fields.Integer(description="Attribute to normalize the data, default = 1 (Population)", default=1),
                              'count': fields.Integer(2, description="Number of similar places in the output")})
 
 class YearRangeSchema(Schema):

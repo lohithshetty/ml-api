@@ -22,3 +22,15 @@ class Data(object):
         print(np.round(i/len(keys), 2), end='\r')
 
         print(' DONE !')
+
+
+# '''
+
+# DB:
+#    state
+#    county
+#    city
+#    supported_attr
+#    attr_id_map
+   
+# '''
