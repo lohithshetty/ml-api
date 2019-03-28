@@ -118,12 +118,11 @@ class PlaceMultiSchema(Schema):
             ordered = True
 
 
-@ns_place.route('/supported', defaults={'place_type': 4})
 @ns_place.route('/supported/<int:place_type>')
 @ns_place.response(200, 'OK')
 @ns_place.response(500, 'Internal Server Error')
 class Supported(Resource):
-    def get(self,place_type):
+    def get(self,place_type=4):
         """
         Returns list of attributes supported to compare places
         """
