@@ -122,9 +122,19 @@ class PlaceMultiSchema(Schema):
 @ns_place.response(200, 'OK')
 @ns_place.response(500, 'Internal Server Error')
 class Supported(Resource):
-    def get(self,place_type=4):
+    def get(self,place_type):
         """
-        Returns list of attributes supported to compare places
+        Returns list of attributes supported to compare state/county/city.
+        """
+        return get_supported_attributes(place_type)
+
+@ns_place.route('/supported')
+@ns_place.response(200, 'OK')
+@ns_place.response(500, 'Internal Server Error')
+class Supported(Resource):
+    def get(self,place_type):
+        """
+        Returns list of common attributes supported to compare places
         """
         return get_supported_attributes(place_type)
 
