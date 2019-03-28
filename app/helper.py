@@ -110,9 +110,12 @@ def get_similar_places(payload, multiattr=False):
                                                            norm_by=norm_by,
                                                            num=count)
     response = []
-    for s in similar_places[1:]:
+    for s in similar_places:
+        if s == _id:
+            continue
         data = {}
-        # data["place_name"] = place.id_to_name[s][0]
+        data["place_name"] = "place_name"
         data["place_id"] = s
         response.append(data)
+
     return response
