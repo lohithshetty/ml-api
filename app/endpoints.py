@@ -66,6 +66,9 @@ class PlaceSingleSchema(Schema):
         if data['attribute'] not in place.supported_attributes:
             errors['attribute'] = ['Unsupported attribute']
 
+        if data['normalize_by'] not in place.supported_attributes:
+            errors['normalize_by'] = ['Unsupported attribute']
+
         if data['id'] not in place.df.index:
             errors['id'] = "Invalid place id"
 
@@ -73,7 +76,7 @@ class PlaceSingleSchema(Schema):
             raise ValidationError(errors)
 
     class Meta:
-        fields = ('id', 'attribute', 'count','place_type', 'year_range')
+        fields = ('id', 'attribute', 'count','place_type', 'year_range','normalize_by')
         ordered = True
 
 
@@ -99,6 +102,9 @@ class PlaceMultiSchema(Schema):
                     "Unsupported attribute '{}' ".format(attribute)]
                 break
 
+        if data['normalize_by'] not in place.supported_attributes:
+            errors['normalize_by'] = ['Unsupported attribute']
+            
         if data['id'] not in place.df.index:
             errors['id'] = "Invalid place id"
 
@@ -110,7 +116,7 @@ class PlaceMultiSchema(Schema):
             raise ValidationError(errors)
 
         class Meta:
-            fields = ('id', 'attribute', 'count','place_type', 'year')
+            fields = ('id', 'attribute', 'count','place_type', 'year','normalize_by')
             ordered = True
 
 
