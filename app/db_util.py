@@ -7,6 +7,10 @@ import json
 with open(db.data_dir / 'supported.json', 'r') as fp:
     supported = json.load(fp)
 
+attr_id_map = pd.read_sql('attr_id_map', db.db_engine)
+attr_id_map.set_index("id", drop=True, inplace=True)
+attr_id_map = attr_id_map.to_dict(orient="index")
+
 class Data(object):
     def __init__(self, table_name, place_type):
         self.engine = db.db_engine

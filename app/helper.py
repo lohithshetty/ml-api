@@ -1,10 +1,10 @@
 import os
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
-import app.db_util as db_util
+import app.db_util as util
 COMMON_ATTRIBUTES = []
 
-state = db_util.Data('state',0)
+state = util.Data('state',0)
 state.create_pivoted_table()
 
 # county = db_util.Data('state')
@@ -62,7 +62,11 @@ def similar_multi_attr_single_year(pivoted, name_id, attributes, year, norm_by=N
 
 def get_supported_attributes(place_type):
     place = get_place(place_type)
-    response = { "state": place.supported_attributes}
+    response = []
+    for _id in place.supported_attributes:
+        attribute = dict({'id' : _id} + util.attr_id_map[_id])
+        response.append(attribute)
+
     return response
 
 def get_common_attributes():
