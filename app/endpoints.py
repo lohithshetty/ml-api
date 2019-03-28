@@ -132,11 +132,11 @@ class Supported(Resource):
 @ns_place.response(200, 'OK')
 @ns_place.response(500, 'Internal Server Error')
 class Supported(Resource):
-    def get(self,place_type):
+    def get(self):
         """
         Returns list of common attributes supported to compare places
         """
-        return get_supported_attributes(place_type)
+        return get_common_attributes()
 
 @ns_place.route('/single')  
 @ns_place.response(501, 'Place ID not supported')

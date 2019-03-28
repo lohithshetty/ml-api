@@ -61,12 +61,12 @@ def similar_multi_attr_single_year(pivoted, name_id, attributes, year, norm_by=N
     return df.iloc[indices].index.tolist(), distances
 
 def get_supported_attributes(place_type):
-    if place_type == 4:
-        response = {"common": COMMON_ATTRIBUTES}
-    else:
-        place = get_place(place_type)
-        response = { "state": place.supported_attributes}
+    place = get_place(place_type)
+    response = { "state": place.supported_attributes}
     return response
+
+def get_common_attributes():
+    return  {"common": COMMON_ATTRIBUTES}
     
 def get_similar_places(payload, multiattr=False):
     place = get_place(payload['place_type'])
