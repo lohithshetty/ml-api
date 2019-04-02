@@ -114,7 +114,6 @@ def get_similar_places(payload, multiattr=False):
         if s == _id:
             continue
         data = {}
-        data["place_name"] = "place_name"
         data["place_id"] = s
         response.append(data)
 

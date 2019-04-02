@@ -22,20 +22,21 @@ year_range = ns_place.model('Year range',
                              'end': fields.Integer(default=2016, description="Ending year")})
 
 PlaceSingle = ns_place.model('Similar places for single attribute',
-                             { 'id': fields.Integer(required=True, description="Place ID"),
-                               'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)"),
-                               'attribute': fields.Integer(required=True, description="Attribute ID"),
-                               'normalize_by': fields.Integer(description="Attribute to normalize the data, default = 1 (Population)", default=1),
-                               'year_range': fields.Nested(year_range, description="Year Range between 1977 and 2016"),
-                               'count': fields.Integer(2, description="Number of similar places in the output")})
+                             {'id': fields.Integer(required=True, description="Place ID"),
+                              'place_type': fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)"),
+                              'attribute': fields.Integer(required=True, description="Attribute ID"),
+                              'normalize_by': fields.Integer(description="Attribute to normalize the data, default = 1 (Population)", default=1),
+                              'year_range': fields.Nested(year_range, description="Year Range between 1977 and 2016"),
+                              'count': fields.Integer(2, description="Number of similar places in the output")})
 
 PlaceMulti = ns_place.model('Similar places for multiple attributes',
-                           { 'id': fields.Integer(required=True, description="Place ID"),
-                             'place_type':fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)"),
+                            {'id': fields.Integer(required=True, description="Place ID"),
+                             'place_type': fields.Integer(required=True, description="Type of place, Ex. state(0), county(1), city(2)"),
                              'year': fields.Integer(required=True, description="Year"),
                              'attribute': fields.List(fields.Integer, required=True, description="List of attribute IDs"),
                              'normalize_by': fields.Integer(description="Attribute to normalize the data, default = 1 (Population)", default=1),
                              'count': fields.Integer(2, description="Number of similar places in the output")})
+
 
 class YearRangeSchema(Schema):
     start = ma_fields.Integer()
@@ -46,6 +47,7 @@ class YearRangeSchema(Schema):
         if data['start'] < 1977 or data['end'] > 2016:
             raise ValidationError(
                 "Only years between 1977 and 2016 are supported(inclusive)")
+
 
 class PlaceSingleSchema(Schema):
     id = ma_fields.Integer()
@@ -58,11 +60,12 @@ class PlaceSingleSchema(Schema):
     @validates_schema
     def validate_input(self, data):
         errors = {}
-        if data['place_type'] not in [0,1,2]:
-            errors['place_type'] = ['Unsupported place type, use 0 (for state), 1 (for county) and 2 (for cities)']
+        if data['place_type'] not in [0, 1, 2]:
+            errors['place_type'] = [
+                'Unsupported place type, use 0 (for state), 1 (for county) and 2 (for cities)']
             raise ValidationError(errors)
 
-        place = get_place(data['place_type'])   
+        place = get_place(data['place_type'])
         if data['attribute'] not in place.supported_attributes:
             errors['attribute'] = ['Unsupported attribute']
 
@@ -76,7 +79,8 @@ class PlaceSingleSchema(Schema):
             raise ValidationError(errors)
 
     class Meta:
-        fields = ('id', 'attribute', 'count','place_type', 'year_range','normalize_by')
+        fields = ('id', 'attribute', 'count', 'place_type',
+                  'year_range', 'normalize_by')
         ordered = True
 
 
@@ -91,11 +95,12 @@ class PlaceMultiSchema(Schema):
     @validates_schema
     def validate_input(self, data):
         errors = {}
-        if data['place_type'] not in [0,1,2]:
-            errors['place_type'] = ['Unsupported place type, use 0 (for state), 1 (for county) and 2 (for cities)']
+        if data['place_type'] not in [0, 1, 2]:
+            errors['place_type'] = [
+                'Unsupported place type, use 0 (for state), 1 (for county) and 2 (for cities)']
             raise ValidationError(errors)
 
-        place = get_place(data['place_type'])   
+        place = get_place(data['place_type'])
         for attribute in data['attribute']:
             if attribute not in place.supported_attributes:
                 errors['attribute'] = [
@@ -104,7 +109,7 @@ class PlaceMultiSchema(Schema):
 
         if data['normalize_by'] not in place.supported_attributes:
             errors['normalize_by'] = ['Unsupported attribute']
-            
+
         if data['id'] not in place.df.index:
             errors['id'] = "Invalid place id"
 
@@ -116,7 +121,8 @@ class PlaceMultiSchema(Schema):
             raise ValidationError(errors)
 
         class Meta:
-            fields = ('id', 'attribute', 'count','place_type', 'year','normalize_by')
+            fields = ('id', 'attribute', 'count',
+                      'place_type', 'year', 'normalize_by')
             ordered = True
 
 
@@ -125,13 +131,14 @@ class PlaceMultiSchema(Schema):
 @ns_place.response(500, 'Internal Server Error')
 @ns_place.response(400, 'Bad Request')
 class Supported(Resource):
-    def get(self,place_type):
+    def get(self, place_type):
         """
         Returns list of attributes supported to compare state/county/city.
         """
-        if place_type not in [0,1,2]:
+        if place_type not in [0, 1, 2]:
             return "Invalid place_type", 400
         return get_supported_attributes(place_type)
+
 
 @ns_place.route('/supported')
 @ns_place.response(200, 'OK')
@@ -144,7 +151,7 @@ class Supported(Resource):
         return get_common_attributes()
 
 
-@ns_place.route('/single')  
+@ns_place.route('/single')
 @ns_place.response(501, 'Place ID not supported')
 @ns_place.response(500, 'Internal Server Error')
 @ns_place.response(200, 'OK')
