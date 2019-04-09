@@ -4,7 +4,7 @@ from app import db
 import json
 
 
-with open(db.data_dir / 'supported.json', 'r') as fp:
+with open(db.data_dir + 'supported.json', 'r') as fp:
     supported = json.load(fp)
 
 attr_id_map = pd.read_sql('attr_id_map', db.db_engine)

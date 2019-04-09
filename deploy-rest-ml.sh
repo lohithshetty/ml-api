@@ -14,7 +14,6 @@ function initialize_worker() {
 function setup_python_venv() {
     printf "***************************************************\n\t\tSetting up Venv \n***************************************************\n"
     # Install virtualenv
-    cd ~/ml-api
     echo ======= Installing virtualenv =======
     pip3 install virtualenv
 
@@ -24,12 +23,6 @@ function setup_python_venv() {
     source ./venv/bin/activate
 }
 
-function clone_app_repository() {
-    printf "***************************************************\n\t\tFetching App \n***************************************************\n"
-    # Clone and access project directory
-    # git clone <> ~/ml-rest
-    cd ~/ml-api/
-}
 
 function setup_app() {
     printf "***************************************************\n    Installing App dependencies and Env Variables \n***************************************************\n"
@@ -42,15 +35,13 @@ function setup_app() {
 
 # Create and Export required environment variable
 function setup_env() {
-    echo ======= Exporting the necessary environment variables ========
-    sudo cat > ~/.env << EOF
-    #export DATABASE_URL="postgres://mldbuser:mldbuser@mldb-truthtree.csoygntfftvt.us-west-2.rds.amazonaws.com/mldb"
-    export DATABASE_URL='postgres://postgres:postgres@127.0.0.1/postgres'
+    sudo cat > .env << EOF
+    export DATABASE_URL="postgres://mldbuser:mldbuser@mldb-truthtree.csoygntfftvt.us-west-2.rds.amazonaws.com/mldb"
+    #export DATABASE_URL='postgres://postgres:postgres@127.0.0.1/postgres'
     export APP_SETTINGS=config.ProductionConfig
-    #export FLASK_APP=app
 EOF
     echo ======= Exporting the necessary environment variables ========
-    source ~/.env
+    source .env
 }
 
 # Install and configure nginx
@@ -98,7 +89,7 @@ function create_launch_script () {
     sudo cat > /home/ubuntu/launch.sh <<EOF
     #!/bin/bash
     cd ~/ml-api/
-    source ~/.env
+    source .env
     source venv/bin/activate
     gunicorn app:app --timeout 300 -D
 EOF
@@ -142,7 +133,6 @@ function launch_app() {
 
 initialize_worker
 setup_python_venv
-clone_app_repository
 setup_app
 setup_nginx
 create_launch_script
