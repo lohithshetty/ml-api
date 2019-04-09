@@ -90,22 +90,27 @@ def get_similar_places(payload, multiattr=False):
     count = payload['count']
     if count > 50:
         count = 50
-    if multiattr:
-        attributes = [str(a) for a in payload['attribute']]
-        similar_places, _ = similar_multi_attr_single_year(pivoted,
+    try:
+        if multiattr:
+            attributes = [str(a) for a in payload['attribute']]
+            similar_places, _ = similar_multi_attr_single_year(pivoted,
                                                            _id,
                                                            attributes,
                                                            payload['year'],
                                                            norm_by=norm_by,
                                                            num=count)
-    else:
-        attribute = str(payload['attribute'])
-        similar_places, _ = similar_single_attr_multi_year(pivoted,
+        else:
+            attribute = str(payload['attribute'])
+            similar_places, _ = similar_single_attr_multi_year(pivoted,
                                                            _id,
                                                            attribute,
                                                            year_range=payload['year_range'],
                                                            norm_by=norm_by,
                                                            num=count)
+    except Exception as e:
+        print("Exception {}".format(e))
+        return []
+
     response = []
     for s in similar_places:
         if s == _id:

@@ -11,7 +11,7 @@ def app():
     # create a temporary file to isolate the database for each test
     db_fd, db_path = tempfile.mkstemp()
     # create the app with common test config
-    app = create_app({
+    app = create_app(test_config={
         'TESTING': True,
     })
 
