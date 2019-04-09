@@ -1,0 +1,580 @@
+id,display_name
+1,Population General
+2,FunctionCode General
+3,Enrollment General
+4,Total Revenue General
+5,Total Rev Own Sources General
+6,General Revenue
+7,Gen Rev Own Sources General
+8,Total Taxes
+9,Property Taxes
+10,Tot Sales Gr Rec Taxes
+11,Total Gen Sales Taxes
+12,Total Select Sales Taxes
+13,Alcoholic Beverage Taxes
+14,Amusement Taxes
+15,Insurance Premium Taxes
+16,Motor Fuels Taxes
+17,Pari mutuels Taxes
+18,Public Utility Taxes
+19,Tobacco Taxes
+20,Other Select Sales Taxes
+21,Total Taxes Licenses
+22,Alcoholic Beverage Licenses
+23,Amusement Licenses
+24,Corporation Licenses
+25,Hunting Fishing Licenses
+26,Motor Vehicle Licenses
+27,Motor Veh Oper Licenses
+28,Motor Vehicle Total Licenses
+29,Public Utility Licenses
+30,Occup and Bus NEC Licenses
+31,Other Taxes Licenses
+32,Total Income Taxes
+33,Individual Income Taxes
+34,Corp Net Income Taxes
+35,Death and Gift Income Taxes
+36,Docum and Stock Tr Income Taxes
+37,Severance Income Taxes
+38,NEC Income Taxes
+39,Total Intergovernmental Revenue
+40,Total Intergovernmental Revenue Federal
+41,Air Transportation Intergovernmental Revenue Federal
+42,Education Intergovernmental Revenue Federal
+43,Emp Sec Adm Intergovernmental Revenue Federal
+44,Gen Rev Shar Intergovernmental Revenue Federal
+45,Gen Support Intergovernmental Revenue Federal
+46,Hospitals Intergovernmental Revenue Federal
+47,Highways Intergovernmental Revenue Federal
+48,Transit Sub Intergovernmental Revenue Federal
+49,Hous Com Dev Intergovernmental Revenue Federal
+50,Natural Res Intergovernmental Revenue Federal
+51,Public Welf Intergovernmental Revenue Federal
+52,Sewerage Intergovernmental Revenue Federal
+53,Other Intergovernmental Revenue Federal
+54,Total Intergovernmental Revenue State
+55,Education Intergovernmental Revenue State
+56,Tax Relief Intergovernmental Revenue State
+57,Oth Gen Sup Intergovernmental Revenue State
+58,Gen Sup Intergovernmental Revenue State
+59,Hospitals Intergovernmental Revenue State
+60,Highways Intergovernmental Revenue State
+61,Transit Sub Intergovernmental Revenue State
+62,Hous Com Dev Intergovernmental Revenue State
+63,Public Welf Intergovernmental Revenue State
+64,Sewerage Intergovernmental Revenue State
+65,Other Intergovernmental Revenue State
+66,Total Intergovernmental Revenue Local
+67,InterSchool Aid Intergovernmental Revenue Local
+68,Other Education Intergovernmental Revenue Local
+69,Oth Gen Sup Intergovernmental Revenue Local
+70,Hospitals Intergovernmental Revenue Local
+71,Highways Intergovernmental Revenue Local
+72,Transit Sub Intergovernmental Revenue Local
+73,Hous Com Dev Intergovernmental Revenue Local
+74,Public Welf Intergovernmental Revenue Local
+75,Sewerage Intergovernmental Revenue Local
+76,Other Intergovernmental Revenue Local
+77,Tot Chgs and Misc Rev Charges
+78,Total General Charges
+79,Air Transportation Charges
+80,Misc Com Activ Charges
+81,Total Education Charges
+82,Total Elem Education Charges
+83,Elem Ed Sch Lunch Charges
+84,Elem Ed Tuition Charges
+85,Elem Ed NEC Charges
+86,Total High Ed Charges
+87,Hospitals Charges
+88,Highways Charges
+89,Regular Highways Charges
+90,Toll Highways Charges
+91,Housing Comm Dev Charges
+92,Total Nat Res Charges
+93,Parking Charges
+94,Parks Recreation Charges
+95,Sewerage Charges
+96,Solid Waste Mgmt Charges
+97,Water Transport Charges
+98,All Other NEC Charges
+99,Misc General Revenue
+100,Special Assessments Misc General Revenue
+101,Prop Sale Total Misc General Revenue
+102,Prop Sale Hous Com Dev Misc General Revenue
+103,Prop Sale Other Misc General Revenue
+104,Interest Revenue Misc General Revenue
+105,Fines and Forfeits Misc General Revenue
+106,Rents and Royalties Misc General Revenue
+107,Net Lottery Revenue Misc General Revenue
+108,Misc General Rev NEC Misc General Revenue
+109,Liquor Revenue Liquor and Utilities
+110,Total Utility Revenue Liquor and Utilities
+111,Water Utility Revenue Liquor and Utilities
+112,Electric Utility Revenue Liquor and Utilities
+113,Gas Utility Revenue Liquor and Utilities
+114,Transit Utility Revenue Liquor and Utilities
+115,Total Revenue Insurance Trusts
+116,Total contributions Insurance Trusts
+117,Tot Inv Rev Insurance Trusts
+118,Total Revenue Retirement Plan Data
+119,total contributions Retirement Plan Data
+120,Loc Emp Ctrib Retirement Plan Data
+121,Loc To Loc Sys Retirement Plan Data
+122,From Other Gov Retirement Plan Data
+123,Sta To Sta Ctr Retirement Plan Data
+124,Int Rev Retirement Plan Data
+125,Other Earnings Retirement Plan Data
+126,Total Unemployment Revenue
+127,Payroll Tax Unemployment Revenue
+128,Int Revenue Unemployment Revenue
+129,Federal Advances Unemployment Revenue
+130,Expenditure Unemployment Revenue
+131,IG Expenditure Totals
+132,Direct Expenditure Totals
+133,Current Expenditure Totals
+134,Current Oper Totals
+135,Capital Outlay Totals
+136,Construction Totals
+137,Other Capital Outlays Totals
+138,Assist Subsidies Totals
+139,Interest on Debt Totals
+140,Insur Trust Ben Totals
+141,Salaries Wages Totals
+154,Total Expenditure Air Transport
+155,Direct Expenditure Air Transport
+156,Capital Outlay Air Transport
+157,Current Expenditure Air Transport
+158,Construction Air Transport
+159,IG To State Air Transport
+160,IG Govts Air Transport
+161,Total Expenditure Misc Commercial Activities
+162,Capital Outlay Misc Commercial Activities
+163,Current Expenditure Misc Commercial Activities
+164,Construction Misc Commercial Activities
+165,Total Expenditure Correctional Institutions
+166,Direct Expenditure Correctional Institutions
+167,Capital Outlay Correctional Institutions
+168,Current Expenditure Correctional Institutions
+169,Construction Correctional Institutions
+170,IG To State Correctional Institutions
+171,IG Loc Govts Correctional Institutions
+172,Expenditure Education
+173,Direct Expenditure Education
+174,Assist Subsidies Education
+175,Capital Outlay Education
+176,Total Current Exp Education
+177,Total Construction Education
+178,Total Expenditure Elementary And Secondary Education
+179,Direct Expenditure Elementary And Secondary Education
+180,Capital Outlay Elementary And Secondary Education
+181,Current Expenditure Elementary And Secondary Education
+182,Construction Elementary And Secondary Education
+183,IG To State Elementary And Secondary Education
+184,IG Govts Elementary And Secondary Education
+185,IG Sch to Sch Elementary And Secondary Education
+186,Total Expenditure Higher Education
+187,Direct Expenditure Higher Education
+188,Capital Outlay Higher Education
+189,Current Expenditure Higher Education
+190,Construction Higher Education
+191,IG To State Higher Education
+192,IG Loc Govts Higher Education
+193,Total Expenditure Education Not Otherwise classified
+194,Direct Expenditure Education Not Otherwise classified
+195,Assistance Education Not Otherwise classified
+196,Capital Outlay Education Not Otherwise classified
+197,Current Expenditure Education Not Otherwise classified
+198,Construction Education Not Otherwise classified
+199,IG To State Education Not Otherwise classified
+200,IG Govts Education Not Otherwise classified
+201,Adm Direct Exp Employment Security Administation
+202,Capital Outlay Employment Security Administation
+203,Adm Current Exp Employment Security Administation
+204,Adm Construct Employment Security Administation
+205,Total Expenditure Financial Administation
+206,Direct Expenditure Financial Administation
+207,Capital Outlay Financial Administation
+208,Current Expenditure Financial Administation
+209,Construction Financial Administation
+210,IG To State Financial Administation
+211,IG Govts Financial Administation
+212,Total Expenditure Fire Protection
+213,Direct Expenditure Fire Protection
+214,Capital Outlay Fire Protection
+215,Current Expenditure Fire Protection
+216,Construction Fire Protection
+217,IG To State Fire Protection
+218,IG Govts Fire Protection
+219,Total Expenditure Judicial Expenditures
+220,Direct Expenditure Judicial Expenditures
+221,Capital Outlay Judicial Expenditures
+222,Current Expenditure Judicial Expenditures
+223,Construction Judicial Expenditures
+224,IG To State Judicial Expenditures
+225,IG Govts Judicial Expenditures
+226,Total Expenditure Central Staff Services
+227,Direct Expenditure Central Staff Services
+228,Capital Outlay Central Staff Services
+229,Current Expenditure Central Staff Services
+230,Construction Central Staff Services
+231,IG To State Central Staff Services
+232,IG Govts Central Staff Services
+233,Total Expenditure General Public Buildings
+234,Capital Outlay General Public Buildings
+235,Current Expenditure General Public Buildings
+236,Construction General Public Buildings
+237,Total Expenditure Health
+238,Direct Expenditure Health
+239,Capital Outlay Health
+240,Current Expenditure Health
+241,Construction Health
+242,IG To State Health
+243,IG Govts Health
+244,Total Expenditure Hospital
+245,Total Dir Exp Hospital
+246,Total Capital Outlays Hospital
+247,Total Current Exp Hospital
+248,Total Construction Hospital
+249,Total IG To State Hospital
+250,Total IG Loc Govts Hospital
+251,Total Expenditure Federal Owned Hospitals
+252,Capital Outlay Federal Owned Hospitals
+253,Current Expenditure Federal Owned Hospitals
+144,IG Exp To Govts General Expenses
+145,IG Exp To Federal Govt General Expenses
+146,Direct Expenditure General Expenses
+147,General Current Expend General Expenses
+149,Capital Outlay General Expenses
+150,General Construction General Expenses
+151,General Capital Outlay Other General Expenses
+152,General Assist Sub General Expenses
+153,General Debt Interest General Expenses
+254,Construction Federal Owned Hospitals
+255,Total Expenditure Other Hospital Expenses- Federal but not veterans
+256,Direct Expenditure Other Hospital Expenses- Federal but not veterans
+257,Capital Outlay Other Hospital Expenses- Federal but not veterans
+258,Current Expenditure Other Hospital Expenses- Federal but not veterans
+259,Construction Other Hospital Expenses- Federal but not veterans
+260,IG To State Other Hospital Expenses- Federal but not veterans
+261,IG Loc Govts Other Hospital Expenses- Federal but not veterans
+262,Total Expenditure Highways
+263,Total Dir Exp Highways
+264,Total Capital Outlays Highways
+265,Total Current Exp Highways
+266,Total Construction Highways
+267,Total Expenditure Non-Toll Highways
+268,Direct Expenditure Non-Toll Highways
+269,Capital Outlay Non-Toll Highways
+270,Current Expenditure Non-Toll Highways
+271,Construction Non-Toll Highways
+272,IG To State Non-Toll Highways
+273,IG Loc Govts Non-Toll Highways
+274,Total Expenditure Toll Highways
+275,Capital Outlay Toll Highways
+276,Current Expenditure Toll Highways
+277,Construction Toll Highways
+278,Total Expenditure Transit Subsidies
+279,Direct Sub Transit Subsidies
+280,IG To State Transit Subsidies
+281,IG Loc Govts Transit Subsidies
+282,To Own Sys Transit Subsidies
+283,Total Expenditure Housing and Community Development
+284,Direct Expenditure Housing and Community Development
+285,Capital Outlay Housing and Community Development
+286,Current Expenditure Housing and Community Development
+287,Construction Housing and Community Development
+288,IG To State Housing and Community Development
+289,IG Loc Govts Housing and Community Development
+290,Total Expenditure Libraries
+291,Direct Expenditure Libraries
+292,Capital Outlay Libraries
+293,Current Expenditure Libraries
+294,Construction Libraries
+295,IG To State Libraries
+296,IG Govts Libraries
+297,Total Expenditure Natural Resources
+298,Direct Expenditure Natural Resources
+299,Capital Outlay Natural Resources
+300,Current Expenditure Natural Resources
+301,Construction Natural Resources
+302,IG To State Natural Resources
+303,IG Loc Govts Natural Resources
+304,Total Expenditure Parking Facilities
+305,Direct Expenditure Parking Facilities
+306,Capital Outlay Parking Facilities
+307,Current Expenditure Parking Facilities
+308,Construction Parking Facilities
+309,IG To State Parking Facilities
+310,IG Govts Parking Facilities
+311,Total Expenditure Parks and Recreation
+312,Direct Expenditure Parks and Recreation
+313,Capital Outlay Parks and Recreation
+314,Current Expenditure Parks and Recreation
+315,Construction Parks and Recreation
+316,IG To State Parks and Recreation
+317,IG Loc Govts Parks and Recreation
+318,Total Expenditure Police Protection
+319,Direct Expenditure Police Protection
+320,Capital Outlay Police Protection
+321,Current Expenditure Police Protection
+322,Construction Police Protection
+323,IG To State Police Protection
+324,IG Loc Govts Police Protection
+325,Total Expenditure Protective Inspection and Regulation
+326,Direct Expenditure Protective Inspection and Regulation
+327,Capital Outlay Protective Inspection and Regulation
+328,Current Expenditure Protective Inspection and Regulation
+329,Construction Protective Inspection and Regulation
+330,IG To State Protective Inspection and Regulation
+331,IG Govts Protective Inspection and Regulation
+332,Total Expenditure Public Welfare
+333,Direct Expenditure Public Welfare
+334,Cash Assistance Public Welfare
+335,Capital Outlay Public Welfare
+336,Current Expenditure Public Welfare
+337,Construction Public Welfare
+338,Total Expenditure Public Welfare-Categorical Assistance Programs
+339,Cash Assistance Public Welfare-Categorical Assistance Programs
+340,IG To State Public Welfare-Categorical Assistance Programs
+341,IG Loc Govts Public Welfare-Categorical Assistance Programs
+342,Total Expenditure Public Welfare-Cash assistance payments
+343,Cash Assistance Public Welfare-Cash assistance payments
+344,IG Govts Public Welfare-Cash assistance payments
+345,Pmts Medical Public Welfare Vendor Payments
+346,Pmts NEC Public Welfare Vendor Payments
+347,Welf Share Part D State Share of Medicare Part D
+348,Total Expenditure Public Welfare Institutions
+349,Capital Outlay Public Welfare Institutions
+350,Current Expenditure Public Welfare Institutions
+351,Construction Public Welfare Institutions
+352,Total Expenditure Welfare Not elsewhere Classified
+353,Direct Expenditure Welfare Not elsewhere Classified
+354,Capital Outlay Welfare Not elsewhere Classified
+355,Current Expenditure Welfare Not elsewhere Classified
+356,Construction Welfare Not elsewhere Classified
+357,IG To State Welfare Not elsewhere Classified
+358,IG Govts Welfare Not elsewhere Classified
+359,Total Expenditure Sewerage
+360,Direct Expenditure Sewerage
+361,Capital Outlay Sewerage
+362,Current Expenditure Sewerage
+363,Construction Sewerage
+364,IG To State Sewerage
+365,IG Govts Sewerage
+366,Total Expenditure Solid Waste Management
+367,Direct Expenditure Solid Waste Management
+368,Capital Outlay Solid Waste Management
+369,Current Expenditure Solid Waste Management
+370,Construction Solid Waste Management
+371,IG To State Solid Waste Management
+372,IG Govts Solid Waste Management
+373,Total Expenditure Sea and Inland Port Facilities
+374,Direct Expenditure Sea and Inland Port Facilities
+375,Capital Outlay Sea and Inland Port Facilities
+376,Current Expenditure Sea and Inland Port Facilities
+377,Construction Sea and Inland Port Facilities
+378,IG To State Sea and Inland Port Facilities
+379,IG Loc Govts Sea and Inland Port Facilities
+380,Interest on Gen Debt Interest on General Debt
+381,Total Expenditure General Expenses not elsewhere classified
+382,Direct Expenditure General Expenses not elsewhere classified
+383,VetBonus General Expenses not elsewhere classified
+384,Capital Outlay General Expenses not elsewhere classified
+385,Current Expenditure General Expenses not elsewhere classified
+386,Construction General Expenses not elsewhere classified
+387,IG To State General Expenses not elsewhere classified
+388,IG Loc Govts General Expenses not elsewhere classified
+389,IG To Fed General Expenses not elsewhere classified
+390,Total Expenditure Liquor
+391,Capital Outlay Liquor
+392,Current Expenditure Liquor
+393,Construction Liquor
+394,Total Expenditure Total Utilities
+395,Inter Exp Total Utilities
+396,Capital Outlay Total Utilities
+397,Current Expenditure Total Utilities
+398,Construction Total Utilities
+399,Total Expenditure Water Supply Utilities
+400,Inter Exp Water Supply Utilities
+401,Capital Outlay Water Supply Utilities
+402,Current Expenditure Water Supply Utilities
+403,Construction Water Supply Utilities
+404,Total Expenditure Electric Power Utilities
+405,Inter Exp Electric Power Utilities
+406,Capital Outlay Electric Power Utilities
+407,Current Expenditure Electric Power Utilities
+408,Construction Electric Power Utilities
+409,Total Expenditure Gas Supply Utilities
+410,Inter Exp Gas Supply Utilities
+411,Capital Outlay Gas Supply Utilities
+412,Current Expenditure Gas Supply Utilities
+413,Construction Gas Supply Utilities
+414,Total Expenditure Transit System Utilities
+415,Inter Exp Transit System Utilities
+416,Capital Outlay Transit System Utilities
+417,Current Expenditure Transit System Utilities
+418,Construction Transit System Utilities
+419,Total Expenditure Employee Retirement
+420,Benefit Payments Employee Retirement
+421,Withdrawals Employee Retirement
+422,Other Paymts Employee Retirement
+423,Total Expenditure Unemployment Compensation
+424,Benefit Payments Unemployment Compensation
+425,Spec Pmts Unemployment Compensation
+426,Total Outstanding Debt Totals
+427,Long Term Debt Out Debt Totals
+428,ST Debt End of Year Debt Totals
+429,Total Outstanding Beginning Long Term Debt Outstanding
+430,Private Purp Beginning Long Term Debt Outstanding
+431,All Other Beginning Long Term Debt Outstanding
+432,Utility Beginning Long Term Debt Outstanding
+433,Water Utility Beginning Long Term Debt Outstanding
+434,Electric Utility Beginning Long Term Debt Outstanding
+435,Gas Util Beginning Long Term Debt Outstanding
+436,Trans Utility Beginning Long Term Debt Outstanding
+437,General Beginning Long Term Debt Outstanding
+438,Education Beginning Long Term Debt Outstanding
+439,Private Purp Beginning Long Term Debt Outstanding
+440,Other NEC Beginning Long Term Debt Outstanding
+441,Total Long Term Debt Issued
+442,Private Purp Long Term Debt Issued
+443,All Other Long Term Debt Issued
+444,Utility Long Term Debt Issued
+445,Water Utility Long Term Debt Issued
+446,Electric Utility Long Term Debt Issued
+447,Util Gas Supply Long Term Debt Issued
+448,Util Transit Long Term Debt Issued
+449,General Long Term Debt Issued
+450,Gen Elem Educ Long Term Debt Issued
+451,Gen Other Educ Long Term Debt Issued
+452,Gen Other NEC Long Term Debt Issued
+453,Total Long Term Debt Issued - Full Faith and Credit
+454,Utility Long Term Debt Issued - Full Faith and Credit
+455,Water Utility Long Term Debt Issued - Full Faith and Credit
+456,Electric Utility Long Term Debt Issued - Full Faith and Credit
+457,Gas Util Long Term Debt Issued - Full Faith and Credit
+458,Trans Utility Long Term Debt Issued - Full Faith and Credit
+459,General Long Term Debt Issued - Full Faith and Credit
+460,Elem Educ Long Term Debt Issued - Full Faith and Credit
+461,Other Education Long Term Debt Issued - Full Faith and Credit
+462,Other NEC Long Term Debt Issued - Full Faith and Credit
+463,Total Long Term Debt Issued - Non guaranteed
+464,Utility Long Term Debt Issued - Non guaranteed
+465,Water Utility Long Term Debt Issued - Non guaranteed
+466,Electric Utility Long Term Debt Issued - Non guaranteed
+467,Gas Util Long Term Debt Issued - Non guaranteed
+468,Trans Utility Long Term Debt Issued - Non guaranteed
+469,General Long Term Debt Issued - Non guaranteed
+470,Elem Educ Long Term Debt Issued - Non guaranteed
+471,Other Education Long Term Debt Issued - Non guaranteed
+472,Private Purp Long Term Debt Issued - Non guaranteed
+473,Other NEC Long Term Debt Issued - Non guaranteed
+474,Total Long Term Debt Issued - Unspecified Issue
+475,Utility Long Term Debt Issued - Unspecified Issue
+476,Water Utility Long Term Debt Issued - Unspecified Issue
+477,Electric Utility Long Term Debt Issued - Unspecified Issue
+478,Gas Util Long Term Debt Issued - Unspecified Issue
+479,Trans Utility Long Term Debt Issued - Unspecified Issue
+480,General Long Term Debt Issued - Unspecified Issue
+481,Elem Educ Long Term Debt Issued - Unspecified Issue
+482,Other Education Long Term Debt Issued - Unspecified Issue
+483,Other NEC Long Term Debt Issued - Unspecified Issue
+484,Total Long Term Debt Retired During Fiscal Year
+485,Private Purp Long Term Debt Retired During Fiscal Year
+486,All Other Long Term Debt Retired During Fiscal Year
+487,Utility Long Term Debt Retired During Fiscal Year
+488,Water Utility Long Term Debt Retired During Fiscal Year
+489,Electric Utility Long Term Debt Retired During Fiscal Year
+490,Util Gas Supply Long Term Debt Retired During Fiscal Year
+491,Util Transit Long Term Debt Retired During Fiscal Year
+492,General Long Term Debt Retired During Fiscal Year
+493,Gen Elem Educ Long Term Debt Retired During Fiscal Year
+494,Gen Other Educ Long Term Debt Retired During Fiscal Year
+495,Gen Other NEC Long Term Debt Retired During Fiscal Year
+496,"Total Long Term Debt Retired, Full Faith and Credit"
+497,"Utility Long Term Debt Retired, Full Faith and Credit"
+498,"Water Utility Long Term Debt Retired, Full Faith and Credit"
+499,"Electric Utility Long Term Debt Retired, Full Faith and Credit"
+500,"Gas Util Long Term Debt Retired, Full Faith and Credit"
+501,"Trans Utility Long Term Debt Retired, Full Faith and Credit"
+502,"General Long Term Debt Retired, Full Faith and Credit"
+503,"Elem Educ Long Term Debt Retired, Full Faith and Credit"
+504,"Other Education Long Term Debt Retired, Full Faith and Credit"
+505,"Other NEC Long Term Debt Retired, Full Faith and Credit"
+506,"Total Long Term Debt Retired, Non Guaranteed"
+507,"Utility Long Term Debt Retired, Non Guaranteed"
+508,"Water Utility Long Term Debt Retired, Non Guaranteed"
+509,"Electric Utility Long Term Debt Retired, Non Guaranteed"
+510,"Gas Util Long Term Debt Retired, Non Guaranteed"
+511,"Trans Utility Long Term Debt Retired, Non Guaranteed"
+512,"General Long Term Debt Retired, Non Guaranteed"
+513,"Elem Educ Long Term Debt Retired, Non Guaranteed"
+514,"Other Education Long Term Debt Retired, Non Guaranteed"
+515,"Private Purp Long Term Debt Retired, Non Guaranteed"
+516,"Other NEC Long Term Debt Retired, Non Guaranteed"
+517,"Total Long Term Debt Retired, Unspecified"
+518,"Utility Long Term Debt Retired, Unspecified"
+519,"Water Utility Long Term Debt Retired, Unspecified"
+520,"Electric Utility Long Term Debt Retired, Unspecified"
+521,"Gas Util Long Term Debt Retired, Unspecified"
+522,"Trans Utility Long Term Debt Retired, Unspecified"
+523,"General Long Term Debt Retired, Unspecified"
+524,"Elem Educ Long Term Debt Retired, Unspecified"
+525,"Other Education Long Term Debt Retired, Unspecified"
+526,"Other NEC Long Term Debt Retired, Unspecified"
+527,Total Long Term Debt Outstanding
+528,Private Purp Long Term Debt Outstanding
+529,All Other Long Term Debt Outstanding
+530,Total Utility Long Term Debt Outstanding
+531,Water Utility Long Term Debt Outstanding
+532,Electric Utility Long Term Debt Outstanding
+533,Util Gas Supply Long Term Debt Outstanding
+534,Util Transit Long Term Debt Outstanding
+535,General Long Term Debt Outstanding
+536,Gen Elem Educ Long Term Debt Outstanding
+537,Gen Other Educ Long Term Debt Outstanding
+538,Gen Other NEC Long Term Debt Outstanding
+539,"Total Long Term Debt Outstanding, Full-Faith and Credit"
+540,"Utility Long Term Debt Outstanding, Full-Faith and Credit"
+541,"Water Utility Long Term Debt Outstanding, Full-Faith and Credit"
+542,"Electric Utility Long Term Debt Outstanding, Full-Faith and Credit"
+543,"Gas Util Long Term Debt Outstanding, Full-Faith and Credit"
+544,"Trans Utility Long Term Debt Outstanding, Full-Faith and Credit"
+545,"General Long Term Debt Outstanding, Full-Faith and Credit"
+546,"Elem Educ Long Term Debt Outstanding, Full-Faith and Credit"
+547,"Other Education Long Term Debt Outstanding, Full-Faith and Credit"
+548,"Other NEC Long Term Debt Outstanding, Full-Faith and Credit"
+549,"Total Long Term Debt Outstanding, Nonguaranteed"
+550,"Utility Long Term Debt Outstanding, Nonguaranteed"
+551,"Water Utility Long Term Debt Outstanding, Nonguaranteed"
+552,"Electric Utility Long Term Debt Outstanding, Nonguaranteed"
+553,"Gas Util Long Term Debt Outstanding, Nonguaranteed"
+554,"Trans Utility Long Term Debt Outstanding, Nonguaranteed"
+555,"General Long Term Debt Outstanding, Nonguaranteed"
+556,"Elem Educ Long Term Debt Outstanding, Nonguaranteed"
+557,"Other Education Long Term Debt Outstanding, Nonguaranteed"
+558,"Private Purp Long Term Debt Outstanding, Nonguaranteed"
+559,"Other NEC Long Term Debt Outstanding, Nonguaranteed"
+560,Total Cash and Securities
+561,Insur Trust Cash Sec Insurance Trust Funds only Cash and Securities
+562,Emp Retire Cash Sec Employee Retirement Systems Cash and Securities
+563,Emp Retire Cash Dep Employee Retirement Systems Cash and Securities
+564,Emp Retire Total Sec Employee Retirement Systems Cash and Securities
+565,Emp Retire Sec Tot Fed Employee Retirement Systems Cash and Securities
+566,Emp Retire Sec S L Secur Employee Retirement Systems Cash and Securities
+567,Emp Retire Sec Tot Nong Employee Retirement Systems Cash and Securities
+568,Emp Retire Sec Corp Bds Employee Retirement Systems Cash and Securities
+569,Emp Retire Sec Corp Stk Employee Retirement Systems Cash and Securities
+570,Emp Retire Sec Mortgages Employee Retirement Systems Cash and Securities
+571,Emp Retire Sec Misc Inv Employee Retirement Systems Cash and Securities
+572,Emp Retire Sec Oth Nong Employee Retirement Systems Cash and Securities
+573,Cash Security Unemployment Compensation Funds Cash and Securities
+574,Bal In US Trs Unemployment Compensation Funds Cash and Securities
+575,Other Balance Unemployment Compensation Funds Cash and Securities
+576,Nonin Trust Cash Sec Other Insurance Trusts Holdings Cash and Securities
+577,Sinking Fd Cash Sec Sinking Funds (Debt Service Funds) cash and Securities
+578,Bond Fd Cash Sec Bond Funds Cash and Securities
+579,Oth Nonin Fd Cash Sec All Other Non-insurance Funds Cash and Securities
+142,General Expenditure
+143,IG Exp To Govts General Expenses
+148,General Current Oper General Expenses
