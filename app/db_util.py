@@ -16,15 +16,17 @@ class Data(object):
         self.engine = db.db_engine
         self.table_name = table_name
         self.place_type = place_type
-        self.df = pd.read_sql(self.table_name, self.engine)
         self.supported_attributes = supported[table_name]
 
     def create_pivoted_table(self):
         print("Creating pivot table for {}".format(self.table_name))
-        pivoted = pd.pivot_table(self.df,
+        self.df = pd.read_sql(self.table_name, self.engine)
+        values = list(set(self.df.keys())-set(['year', 'id']))
+        self.df = None
+        pivoted = pd.pivot_table(pd.read_sql(self.table_name, self.engine),
                              index='id',
                              columns='year',
-                             values=list(set(self.df.keys())-set(['year', 'id'])))
+                             values=values)
         keys = list(set([key[0] for key in pivoted.keys()]))
         for i, key in enumerate(keys, 1):
             pivoted[key].iloc[:, 0] = pivoted[key].iloc[:, 0].fillna(0)

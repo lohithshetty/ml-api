@@ -3,14 +3,14 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 import app.db_util as util
 
-state = util.Data('state', 0)
-state.create_pivoted_table()
+city = util.Data('city',2)
+city.create_pivoted_table()
 
 county = util.Data('county',1)
 county.create_pivoted_table()
 
-city = util.Data('city',2)
-city.create_pivoted_table()
+state = util.Data('state', 0)
+state.create_pivoted_table()
 
 
 def get_place(place_type):
@@ -42,7 +42,7 @@ def similar_single_attr_multi_year(pivoted, name_id, attribute, year_range=None,
         df = df.loc[:, year_range['start']:year_range['end']]
 
     distances, indices = getNearest(df, np.asarray(
-        df.loc[name_id]).reshape(1, -1), num)
+        df.loc[name_id]).reshape(1, -1), num + 1)
     indices = indices[0]
 
     return df.iloc[indices].index.tolist(), distances
@@ -56,7 +56,7 @@ def similar_multi_attr_single_year(pivoted, name_id, attributes, year, norm_by=N
     df = df[[key for key in df.keys() if key[1] == year]]
     df = df.replace([np.inf, -np.inf], np.nan).fillna(0)
     distances, indices = getNearest(df, np.asarray(
-        df.loc[name_id]).reshape(1, -1), num)
+        df.loc[name_id]).reshape(1, -1), num+1)
     indices = indices[0]
 
     return df.iloc[indices].index.tolist(), distances
