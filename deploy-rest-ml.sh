@@ -38,7 +38,7 @@ EOF'
 #Serve the web app through gunicorn
 function launch_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
-    gunicorn app:app --timeout 300 
+    gunicorn app:app --timeout 300 --bind 0.0.0.0:8000
 }
 
 ######################################################################
