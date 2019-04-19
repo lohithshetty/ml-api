@@ -26,7 +26,7 @@ function setup_python_venv() {
 
 function setup_app() {
     printf "***************************************************\n    Installing App dependencies and Env Variables \n***************************************************\n"
-    setup_env
+    #setup_env
     # Install required packages
     echo ======= Installing required packages ========
     pip3 install -r requirements.txt
@@ -83,7 +83,7 @@ EOF'
 #Serve the web app through gunicorn
 function launch_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
-    gunicorn app:app --timeout 300 -D
+    gunicorn app:app --timeout 300 
 }
 
 ######################################################################
@@ -91,7 +91,6 @@ function launch_app() {
 ######################################################################
 
 initialize_worker
-#setup_python_venv
 setup_app
 setup_nginx
 launch_app
