@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
 import os
 import io
-from pathlib import Path
-import sys
 import pandas as pd
+import argparse
+
 
 print("Creating PSQL engine to {}".format(os.environ['DATABASE_URL']))
 db_engine = create_engine(os.environ['DATABASE_URL'])
@@ -11,9 +11,9 @@ data_dir = "app/data/"
 data_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
 
 
-def init_db():
+def init_db(data_dir):
     for csv in data_files:
-        create_table(data_dir + csv, csv.split('.')[0])
+        create_table(data_dir + '/' + csv, csv.split('.')[0])
 
 
 def create_table(csv, table_name):
@@ -30,5 +30,11 @@ def create_table(csv, table_name):
     cur.copy_from(output, table_name, null="")  # null values become ''
     conn.commit()
 
+
 if __name__ == "__main__":
-    init_db()
+    parser = argparse.ArgumentParser(description='Process datapath')
+    parser.add_argument('-p', '--path', required=True,
+                        help='path of the original data(csv) files')
+    args = parser.parse_args()
+
+    init_db(args.path)

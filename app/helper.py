@@ -3,10 +3,10 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 import app.db_util as util
 
-city = util.Data('city',2)
+city = util.Data('city', 2)
 city.create_pivoted_table()
 
-county = util.Data('county',1)
+county = util.Data('county', 1)
 county.create_pivoted_table()
 
 state = util.Data('state', 0)
@@ -44,8 +44,10 @@ def similar_single_attr_multi_year(pivoted, name_id, attribute, year_range=None,
     distances, indices = getNearest(df, np.asarray(
         df.loc[name_id]).reshape(1, -1), num + 1)
     indices = indices[0]
+    similarity_score = (df.loc[name_id].mean() -
+                        distances)/df.loc[name_id].mean()
 
-    return df.iloc[indices].index.tolist(), distances
+    return df.iloc[indices].index.tolist(), similarity_score[0]
 
 
 def similar_multi_attr_single_year(pivoted, name_id, attributes, year, norm_by=None, num=2):
@@ -58,8 +60,9 @@ def similar_multi_attr_single_year(pivoted, name_id, attributes, year, norm_by=N
     distances, indices = getNearest(df, np.asarray(
         df.loc[name_id]).reshape(1, -1), num+1)
     indices = indices[0]
-
-    return df.iloc[indices].index.tolist(), distances
+    similarity_score = (df.loc[name_id].mean() -
+                        distances)/df.loc[name_id].mean()
+    return df.iloc[indices].index.tolist(), similarity_score[0]
 
 
 def get_supported_attributes(place_type):
@@ -93,30 +96,31 @@ def get_similar_places(payload, multiattr=False):
     try:
         if multiattr:
             attributes = [str(a) for a in payload['attribute']]
-            similar_places, _ = similar_multi_attr_single_year(pivoted,
-                                                           _id,
-                                                           attributes,
-                                                           payload['year'],
-                                                           norm_by=norm_by,
-                                                           num=count)
+            similar_places, score = similar_multi_attr_single_year(pivoted,
+                                                                   _id,
+                                                                   attributes,
+                                                                   payload['year'],
+                                                                   norm_by=norm_by,
+                                                                   num=count)
         else:
             attribute = str(payload['attribute'])
-            similar_places, _ = similar_single_attr_multi_year(pivoted,
-                                                           _id,
-                                                           attribute,
-                                                           year_range=payload['year_range'],
-                                                           norm_by=norm_by,
-                                                           num=count)
+            similar_places, score = similar_single_attr_multi_year(pivoted,
+                                                                   _id,
+                                                                   attribute,
+                                                                   year_range=payload['year_range'],
+                                                                   norm_by=norm_by,
+                                                                   num=count)
     except Exception as e:
         print("Exception {}".format(e))
         return []
 
     response = []
-    for s in similar_places:
-        if s == _id:
+    for place, score in zip(similar_places, score):
+        if place == _id:
             continue
         data = {}
-        data["place_id"] = s
+        data["place_id"] = place
+        data["similarity_score"] = score
         response.append(data)
 
     return response
