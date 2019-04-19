@@ -1,0 +1,38 @@
+
+language: python
+
+services:
+  - docker
+
+
+before_deploy:
+  # build deployed docker image
+  - docker build -t ml-truthtree .
+  # tag docker image
+  - docker tag ml-truthtree:latest $IMAGE_ID_URL:latest
+  
+  # install python using conda
+  - >-
+    wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh -O ~/anaconda3.sh
+    || true
+    && bash ~/anaconda3.sh -b -p ~/anaconda3 || true
+    && rm ~/anaconda3.sh
+    && echo 'export PATH="$HOME/anaconda3/bin:$PATH"' >> ~/.bashrc
+    && source ~/.bashrc
+    && conda create -n py27 python=2.7.16 -y
+    && source activate py27
+  # install AWS CLI
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
+  # login to ECR
+  - eval $(aws ecr get-login --no-include-email --region us-west-2)
+
+deploy:
+  # deploy master to production
+  - provider: script
+    script:
+      # push to aws
+      docker push $IMAGE_ID_URL:latest;
+      bash ./bin/travis_wait.sh "./bin/ecs-deploy.sh -c $CLUSTER_NAME -n $SERVICE_NAME -i $IMAGE_ID_URL:latest -r us-west-2 --timeout 1200";
+    on:
+      branch: master
