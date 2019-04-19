@@ -1,50 +1,5 @@
 #! /bin/bash
 
-function initialize_worker() {
-    printf "***************************************************\n\t\tSetting up host \n***************************************************\n"
-    # Update packages
-    echo ======= Updating packages ========
-     apt-get update
-
-    # Install pip3
-    echo ======= Installing pip3 =======
-     apt-get install -y python3-pip
-}
-
-function setup_python_venv() {
-    printf "***************************************************\n\t\tSetting up Venv \n***************************************************\n"
-    # Install virtualenv
-    echo ======= Installing virtualenv =======
-     apt install virtualenv -y
-
-    # Create virtual environment and activate it
-    echo ======== Creating and activating virtual env =======
-    virtualenv -p python3 venv
-    source ./venv/bin/activate
-}
-
-
-function setup_app() {
-    printf "***************************************************\n    Installing App dependencies and Env Variables \n***************************************************\n"
-    #setup_env
-    # Install required packages
-    echo ======= Installing required packages ========
-    pip3 install -r requirements.txt
-
-}
-
-# Create and Export required environment variable
-function setup_env() {
-     cat > .env << EOF
-    export DATABASE_URL="postgres://mldbuser:mldbuser@mldb.csoygntfftvt.us-west-2.rds.amazonaws.com/mldb"
-    #export DATABASE_URL='postgres://postgres:postgres@127.0.0.1/postgres'
-    export APP_SETTINGS=config.ProductionConfig
-EOF
-    echo ======= Exporting the necessary environment variables ========
-    source .env
-    export
-}
-
 # Install and configure nginx
 function setup_nginx() {
     printf "***************************************************\n\t\tSetting up nginx \n***************************************************\n"
@@ -89,8 +44,5 @@ function launch_app() {
 ######################################################################
 ########################      RUNTIME       ##########################
 ######################################################################
-
-initialize_worker
-setup_app
 setup_nginx
 launch_app
